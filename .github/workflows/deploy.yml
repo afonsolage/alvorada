@@ -50,7 +50,11 @@ jobs:
               | sed 's/version = "\(.*\)"/\1/'
           )
           echo "Installing wasm-bindgen-cli $WASM_BINDGEN_VERSION"
-          cargo install wasm-bindgen-cli --version "$WASM_BINDGEN_VERSION" --locked
+          if ! wasm-bindgen --version 2>/dev/null | grep -qF "$WASM_BINDGEN_VERSION"; then
+            cargo install wasm-bindgen-cli --version "$WASM_BINDGEN_VERSION" --locked --force
+          else
+            echo "wasm-bindgen-cli $WASM_BINDGEN_VERSION already installed, skipping."
+          fi
 
       - name: Build game for WebAssembly
         run: cargo build --profile wasm-release --target wasm32-unknown-unknown
