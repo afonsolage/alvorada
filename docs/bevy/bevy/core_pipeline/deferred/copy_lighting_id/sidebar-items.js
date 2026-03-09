@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["init_copy_deferred_lighting_id_pipeline"],"struct":["CopyDeferredLightingIdNode","CopyDeferredLightingIdPlugin","DeferredLightingIdDepthTexture"]};

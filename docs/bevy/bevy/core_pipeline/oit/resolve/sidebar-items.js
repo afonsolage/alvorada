@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":["OIT_REQUIRED_STORAGE_BUFFERS"],"fn":["is_oit_supported","prepare_oit_resolve_bind_group","queue_oit_resolve_pipeline"],"mod":["node"],"struct":["OitResolveBindGroup","OitResolvePipeline","OitResolvePipelineId","OitResolvePipelineKey","OitResolvePlugin"]};

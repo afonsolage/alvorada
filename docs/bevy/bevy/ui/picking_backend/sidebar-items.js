@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["ui_picking"],"struct":["NodeQuery","NodeQueryItem","NodeQueryReadOnly","NodeQueryReadOnlyItem","UiPickingCamera","UiPickingPlugin","UiPickingSettings"]};

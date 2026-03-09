@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["despawn_entities_on_enter_state","despawn_entities_on_exit_state"],"struct":["DespawnOnEnter","DespawnOnExit"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["DirectionalNavigationError"],"fn":["auto_generate_navigation_edges"],"struct":["AutoNavigationConfig","DirectionalNavigation","DirectionalNavigationMap","DirectionalNavigationPlugin","FocusableArea","NavNeighbors"],"trait":["Navigable"]};

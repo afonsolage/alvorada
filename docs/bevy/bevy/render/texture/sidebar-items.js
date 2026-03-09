@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["update_texture_cache_system"],"struct":["CachedTexture","ColorAttachment","DefaultImageSampler","DepthAttachment","FallbackImage","FallbackImageCubemap","FallbackImageFormatMsaaCache","FallbackImageMsaa","FallbackImageZero","GpuImage","ManualTextureView","ManualTextureViews","OutputColorAttachment","TextureCache","TexturePlugin"]};

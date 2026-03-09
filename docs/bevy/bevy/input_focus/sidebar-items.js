@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["InputFocusSystems"],"fn":["dispatch_focused_input","set_initial_focus"],"mod":["directional_navigation","navigator","tab_navigation"],"struct":["AcquireFocus","AutoFocus","FocusedInput","InputDispatchPlugin","InputFocus","InputFocusVisible","IsFocusedHelper","WindowTraversal","WindowTraversalItem"],"trait":["IsFocused"]};

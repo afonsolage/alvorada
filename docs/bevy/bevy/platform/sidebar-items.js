@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["cell","cfg","collections","hash","prelude","sync","thread","time"]};

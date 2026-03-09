@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["contrast_adaptive_sharpening","fxaa","smaa","taa"],"struct":["AntiAliasPlugin"]};

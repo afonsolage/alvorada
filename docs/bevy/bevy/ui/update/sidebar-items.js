@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["propagate_ui_target_cameras","update_clipping_system"]};

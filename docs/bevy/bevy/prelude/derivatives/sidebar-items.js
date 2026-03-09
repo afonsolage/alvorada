@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["adaptor_impls"],"struct":["SampleDerivativeWrapper","SampleTwoDerivativesWrapper"],"trait":["CurveWithDerivative","CurveWithTwoDerivatives","SampleDerivative","SampleTwoDerivatives"]};

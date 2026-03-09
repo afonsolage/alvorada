@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["clustered"],"struct":["ForwardDecal","ForwardDecalMaterialExt","ForwardDecalMaterialExtUniform","ForwardDecalPlugin"],"type":["ForwardDecalMaterial"]};
