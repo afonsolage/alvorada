@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["clustered_decals_are_usable","extract_decals"],"struct":["ClusteredDecalPlugin","DecalsBuffer","RenderClusteredDecal","RenderClusteredDecals"]};

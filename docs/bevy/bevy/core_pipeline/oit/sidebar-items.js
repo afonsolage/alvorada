@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["init_oit_buffers","prepare_oit_buffers"],"mod":["resolve"],"struct":["OitBuffers","OrderIndependentTransparencyPlugin","OrderIndependentTransparencySettings","OrderIndependentTransparencySettingsOffset"]};

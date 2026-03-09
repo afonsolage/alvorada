@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["AmbientLight","DirectionalLight","EnvironmentMapLight","GeneratedEnvironmentMapLight","GlobalAmbientLight","LightProbe","PointLight","SpotLight"]};

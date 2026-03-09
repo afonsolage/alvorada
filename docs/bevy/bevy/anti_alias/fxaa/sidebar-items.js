@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Sensitivity"],"fn":["init_fxaa_pipeline","prepare_fxaa_pipelines"],"struct":["CameraFxaaPipeline","Fxaa","FxaaNode","FxaaPipeline","FxaaPipelineKey","FxaaPlugin"]};

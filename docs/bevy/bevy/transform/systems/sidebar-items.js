@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["mark_dirty_trees","propagate_parent_transforms","sync_simple_transforms"],"struct":["StaticTransformOptimizations"]};

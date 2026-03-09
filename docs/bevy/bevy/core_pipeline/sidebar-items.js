@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["blit","core_2d","core_3d","deferred","experimental","fullscreen_material","oit","prepass","tonemapping","upscaling"],"struct":["CorePipelinePlugin","FullscreenShader","Skybox"]};

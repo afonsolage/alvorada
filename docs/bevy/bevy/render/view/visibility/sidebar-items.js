@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["VISIBILITY_RANGES_STORAGE_BUFFER_COUNT"],"fn":["extract_visibility_ranges","write_render_visibility_ranges"],"struct":["RenderVisibilityRangePlugin","RenderVisibilityRanges","RenderVisibleEntities"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Gradient","InterpolationColorSpace","RadialGradientShape"],"struct":["AngularColorStop","BackgroundGradient","BorderGradient","ColorStop","ConicGradient","LinearGradient","RadialGradient"],"trait":["InColorSpace"]};

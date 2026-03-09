@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["CUBE_MAP_FACES"],"enum":["CubemapLayout"],"fn":["face_index_to_name"],"struct":["Aabb","CascadesFrusta","CubeMapFace","CubemapFrusta","Frustum","HalfSpace","Sphere"],"trait":["MeshAabb"]};

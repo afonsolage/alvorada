@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["auto_exposure","bloom","dof","effect_stack","motion_blur","msaa_writeback"],"struct":["PostProcessPlugin"]};

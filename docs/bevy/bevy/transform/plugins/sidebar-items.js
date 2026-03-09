@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["TransformSystems"],"struct":["TransformPlugin"]};

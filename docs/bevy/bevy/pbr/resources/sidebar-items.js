@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["init_atmosphere_buffer","prepare_atmosphere_uniforms"],"struct":["AtmosphereBuffer","AtmosphereSampler","AtmosphereTextures","AtmosphereTransform","AtmosphereTransforms","AtmosphereTransformsOffset","GpuAtmosphere"]};

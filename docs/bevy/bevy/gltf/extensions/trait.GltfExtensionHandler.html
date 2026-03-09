@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="glTF Extensions can attach data to any objects in a glTF file. This is done by inserting data in the `extensions` sub-object, and data in the extensions sub-object is keyed by the id of the extension. For example: `KHR_materials_variants`, `EXT_meshopt_compression`, or `BEVY_my_tool`"><title>GltfExtensionHandler in bevy::gltf::extensions - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b7b9f40b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bevy" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0-nightly (b41f22de2 2026-03-08)" data-channel="nightly" data-search-js="search-63369b7b.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="icon" href="https://bevy.org/assets/icon.png"></head><body class="rustdoc trait"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">GltfExtensionHandler</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../bevy/index.html"><img src="https://bevy.org/assets/icon.png" alt="logo"></a><h2><a href="../../../bevy/index.html">bevy</a><span class="version">0.18.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Gltf<wbr>Extension<wbr>Handler</a></h2><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.dyn_clone" title="dyn_clone">dyn_clone</a></li></ul><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.on_animation" title="on_animation">on_animation</a></li><li><a href="#method.on_animations_collected" title="on_animations_collected">on_animations_collected</a></li><li><a href="#method.on_gltf_mesh" title="on_gltf_mesh">on_gltf_mesh</a></li><li><a href="#method.on_gltf_node" title="on_gltf_node">on_gltf_node</a></li><li><a href="#method.on_material" title="on_material">on_material</a></li><li><a href="#method.on_root" title="on_root">on_root</a></li><li><a href="#method.on_scene_completed" title="on_scene_completed">on_scene_completed</a></li><li><a href="#method.on_spawn_light_directional" title="on_spawn_light_directional">on_spawn_light_directional</a></li><li><a href="#method.on_spawn_light_point" title="on_spawn_light_point">on_spawn_light_point</a></li><li><a href="#method.on_spawn_light_spot" title="on_spawn_light_spot">on_spawn_light_spot</a></li><li><a href="#method.on_spawn_mesh_and_material" title="on_spawn_mesh_and_material">on_spawn_mesh_and_material</a></li><li><a href="#method.on_texture" title="on_texture">on_texture</a></li></ul><h3><a href="#trait-implementations">Trait Implementations</a></h3><ul class="block trait-implementation"><li><a href="#impl-Clone-for-Box%3Cdyn+GltfExtensionHandler%3E" title="Clone">Clone</a></li></ul><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In bevy::<wbr>gltf::<wbr>extensions</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">bevy</a>::<wbr><a href="../index.html">gltf</a>::<wbr><a href="index.html">extensions</a></div><h1>Trait <span class="trait">Gltf<wbr>Extension<wbr>Handler</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>pub trait GltfExtensionHandler: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Send.html" title="trait core::marker::Send">Send</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html" title="trait core::marker::Sync">Sync</a> {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 13 methods</span></summary>    // Required method
+    fn <a href="#tymethod.dyn_clone" class="fn">dyn_clone</a>(&amp;self) -&gt; <a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;dyn <a class="trait" href="trait.GltfExtensionHandler.html" title="trait bevy::gltf::extensions::GltfExtensionHandler">GltfExtensionHandler</a>&gt;;
+
+    // Provided methods
+    fn <a href="#method.on_root" class="fn">on_root</a>(&amp;mut self, gltf: &amp;Gltf) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_animation" class="fn">on_animation</a>(
+        &amp;mut self,
+        gltf_animation: &amp;Animation&lt;'_&gt;,
+        handle: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_animations_collected" class="fn">on_animations_collected</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        animations: &amp;[<a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;],
+        named_animations: &amp;<a class="struct" href="../../platform/collections/struct.HashMap.html" title="struct bevy::platform::collections::HashMap">HashMap</a>&lt;<a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;, <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;&gt;,
+        animation_roots: &amp;<a class="struct" href="../../platform/collections/struct.HashSet.html" title="struct bevy::platform::collections::HashSet">HashSet</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_texture" class="fn">on_texture</a>(&amp;mut self, gltf_texture: &amp;Texture&lt;'_&gt;, texture: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.Image.html" title="struct bevy::prelude::Image">Image</a>&gt;) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_material" class="fn">on_material</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_material: &amp;Material&lt;'_&gt;,
+        material: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.StandardMaterial.html" title="struct bevy::prelude::StandardMaterial">StandardMaterial</a>&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_gltf_mesh" class="fn">on_gltf_mesh</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_mesh: &amp;Mesh&lt;'_&gt;,
+        mesh: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../struct.GltfMesh.html" title="struct bevy::gltf::GltfMesh">GltfMesh</a>&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_spawn_mesh_and_material" class="fn">on_spawn_mesh_and_material</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        primitive: &amp;Primitive&lt;'_&gt;,
+        mesh: &amp;Mesh&lt;'_&gt;,
+        material: &amp;Material&lt;'_&gt;,
+        entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_scene_completed" class="fn">on_scene_completed</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        scene: &amp;Scene&lt;'_&gt;,
+        world_root_id: <a class="struct" href="../../prelude/struct.Entity.html" title="struct bevy::prelude::Entity">Entity</a>,
+        scene_world: &amp;mut <a class="struct" href="../../prelude/struct.World.html" title="struct bevy::prelude::World">World</a>,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_gltf_node" class="fn">on_gltf_node</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_node: &amp;Node&lt;'_&gt;,
+        entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_spawn_light_directional" class="fn">on_spawn_light_directional</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_node: &amp;Node&lt;'_&gt;,
+        entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_spawn_light_point" class="fn">on_spawn_light_point</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_node: &amp;Node&lt;'_&gt;,
+        entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+    ) { ... }
+<span class="item-spacer"></span>    fn <a href="#method.on_spawn_light_spot" class="fn">on_spawn_light_spot</a>(
+        &amp;mut self,
+        load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+        gltf_node: &amp;Node&lt;'_&gt;,
+        entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+    ) { ... }
+</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>glTF Extensions can attach data to any objects in a glTF file.
+This is done by inserting data in the <code>extensions</code> sub-object, and
+data in the extensions sub-object is keyed by the id of the extension.
+For example: <code>KHR_materials_variants</code>, <code>EXT_meshopt_compression</code>, or <code>BEVY_my_tool</code></p>
+<p>A list of publicly known extensions and their ids can be found
+in the <a href="https://github.com/KhronosGroup/glTF/blob/main/extensions/README.md">KhronosGroup/glTF</a>
+git repo. Vendors reserve prefixes, such as the <code>BEVY</code> prefix,
+which is also listed in the <a href="https://github.com/KhronosGroup/glTF/blob/main/extensions/Prefixes.md">KhronosGroup repo</a>.</p>
+<p>The <code>GltfExtensionHandler</code> trait should be implemented to participate in
+processing glTF files as they load, and exposes glTF extension data via
+a series of hook callbacks.</p>
+<p>The type a <code>GltfExtensionHandler</code> is implemented for can define data
+which will be cloned for each new glTF load. This enables stateful
+handling of glTF extension data during a single load.</p>
+<p>When loading a glTF file, a glTF object that could contain extension
+data will cause the relevant hook to execute once per object.
+Each invocation will receive all extension data, which is required because
+many extensions require accessing data defined by other extensions.</p>
+<p>The hooks are always called once, even if there is no extension data
+This is useful for scenarios where additional extension data isn’t
+required, but processing should still happen.</p>
+</div></details><h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.dyn_clone" class="method"><h4 class="code-header">fn <a href="#tymethod.dyn_clone" class="fn">dyn_clone</a>(&amp;self) -&gt; <a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;dyn <a class="trait" href="trait.GltfExtensionHandler.html" title="trait bevy::gltf::extensions::GltfExtensionHandler">GltfExtensionHandler</a>&gt;</h4></section></summary><div class="docblock"><p>Required for dyn cloning</p>
+</div></details></div><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.on_root" class="method"><h4 class="code-header">fn <a href="#method.on_root" class="fn">on_root</a>(&amp;mut self, gltf: &amp;Gltf)</h4></section></summary><div class="docblock"><p>Called when the “global” data for an extension
+at the root of a glTF file is encountered.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_animation" class="method"><h4 class="code-header">fn <a href="#method.on_animation" class="fn">on_animation</a>(
+    &amp;mut self,
+    gltf_animation: &amp;Animation&lt;'_&gt;,
+    handle: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;,
+)</h4></section></summary><div class="docblock"><p>Called when an individual animation is processed</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_animations_collected" class="method"><h4 class="code-header">fn <a href="#method.on_animations_collected" class="fn">on_animations_collected</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    animations: &amp;[<a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;],
+    named_animations: &amp;<a class="struct" href="../../platform/collections/struct.HashMap.html" title="struct bevy::platform::collections::HashMap">HashMap</a>&lt;<a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;, <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.AnimationClip.html" title="struct bevy::prelude::AnimationClip">AnimationClip</a>&gt;&gt;,
+    animation_roots: &amp;<a class="struct" href="../../platform/collections/struct.HashSet.html" title="struct bevy::platform::collections::HashSet">HashSet</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>&gt;,
+)</h4></section></summary><div class="docblock"><p>Called when all animations have been collected.
+<code>animations</code> is the glTF ordered list of <code>Handle&lt;AnimationClip&gt;</code>s
+<code>named_animations</code> is a <code>HashMap</code> from animation name to <code>Handle&lt;AnimationClip&gt;</code>
+<code>animation_roots</code> is the glTF index of the animation root object</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_texture" class="method"><h4 class="code-header">fn <a href="#method.on_texture" class="fn">on_texture</a>(&amp;mut self, gltf_texture: &amp;Texture&lt;'_&gt;, texture: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.Image.html" title="struct bevy::prelude::Image">Image</a>&gt;)</h4></section></summary><div class="docblock"><p>Called when an individual texture is processed</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_material" class="method"><h4 class="code-header">fn <a href="#method.on_material" class="fn">on_material</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_material: &amp;Material&lt;'_&gt;,
+    material: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../../prelude/struct.StandardMaterial.html" title="struct bevy::prelude::StandardMaterial">StandardMaterial</a>&gt;,
+)</h4></section></summary><div class="docblock"><p>Called when an individual material is processed</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_gltf_mesh" class="method"><h4 class="code-header">fn <a href="#method.on_gltf_mesh" class="fn">on_gltf_mesh</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_mesh: &amp;Mesh&lt;'_&gt;,
+    mesh: <a class="enum" href="../../prelude/enum.Handle.html" title="enum bevy::prelude::Handle">Handle</a>&lt;<a class="struct" href="../struct.GltfMesh.html" title="struct bevy::gltf::GltfMesh">GltfMesh</a>&gt;,
+)</h4></section></summary><div class="docblock"><p>Called when an individual glTF Mesh is processed</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_spawn_mesh_and_material" class="method"><h4 class="code-header">fn <a href="#method.on_spawn_mesh_and_material" class="fn">on_spawn_mesh_and_material</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    primitive: &amp;Primitive&lt;'_&gt;,
+    mesh: &amp;Mesh&lt;'_&gt;,
+    material: &amp;Material&lt;'_&gt;,
+    entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+)</h4></section></summary><div class="docblock"><p>mesh and material are spawned as a single Entity,
+which means an extension would have to decide for
+itself how to merge the extension data.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_scene_completed" class="method"><h4 class="code-header">fn <a href="#method.on_scene_completed" class="fn">on_scene_completed</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    scene: &amp;Scene&lt;'_&gt;,
+    world_root_id: <a class="struct" href="../../prelude/struct.Entity.html" title="struct bevy::prelude::Entity">Entity</a>,
+    scene_world: &amp;mut <a class="struct" href="../../prelude/struct.World.html" title="struct bevy::prelude::World">World</a>,
+)</h4></section></summary><div class="docblock"><p>Called when an individual Scene is done processing</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_gltf_node" class="method"><h4 class="code-header">fn <a href="#method.on_gltf_node" class="fn">on_gltf_node</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_node: &amp;Node&lt;'_&gt;,
+    entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+)</h4></section></summary><div class="docblock"><p>Called when a node is processed</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_spawn_light_directional" class="method"><h4 class="code-header">fn <a href="#method.on_spawn_light_directional" class="fn">on_spawn_light_directional</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_node: &amp;Node&lt;'_&gt;,
+    entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+)</h4></section></summary><div class="docblock"><p>Called with a <code>DirectionalLight</code> node is spawned
+which is typically created as a result of
+<code>KHR_lights_punctual</code></p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_spawn_light_point" class="method"><h4 class="code-header">fn <a href="#method.on_spawn_light_point" class="fn">on_spawn_light_point</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_node: &amp;Node&lt;'_&gt;,
+    entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+)</h4></section></summary><div class="docblock"><p>Called with a <code>PointLight</code> node is spawned
+which is typically created as a result of
+<code>KHR_lights_punctual</code></p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.on_spawn_light_spot" class="method"><h4 class="code-header">fn <a href="#method.on_spawn_light_spot" class="fn">on_spawn_light_spot</a>(
+    &amp;mut self,
+    load_context: &amp;mut <a class="struct" href="../../asset/struct.LoadContext.html" title="struct bevy::asset::LoadContext">LoadContext</a>&lt;'_&gt;,
+    gltf_node: &amp;Node&lt;'_&gt;,
+    entity: &amp;mut <a class="struct" href="../../prelude/struct.EntityWorldMut.html" title="struct bevy::prelude::EntityWorldMut">EntityWorldMut</a>&lt;'_&gt;,
+)</h4></section></summary><div class="docblock"><p>Called with a <code>SpotLight</code> node is spawned
+which is typically created as a result of
+<code>KHR_lights_punctual</code></p>
+</div></details></div><h2 id="trait-implementations" class="section-header">Trait Implementations<a href="#trait-implementations" class="anchor">§</a></h2><div id="trait-implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-Clone-for-Box%3Cdyn+GltfExtensionHandler%3E" class="impl"><a href="#impl-Clone-for-Box%3Cdyn+GltfExtensionHandler%3E" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;dyn <a class="trait" href="trait.GltfExtensionHandler.html" title="trait bevy::gltf::extensions::GltfExtensionHandler">GltfExtensionHandler</a>&gt;</h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.clone" class="method trait-impl"><a href="#method.clone" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone" class="fn">clone</a>(&amp;self) -&gt; <a class="struct" href="../../prelude/struct.Box.html" title="struct bevy::prelude::Box">Box</a>&lt;dyn <a class="trait" href="trait.GltfExtensionHandler.html" title="trait bevy::gltf::extensions::GltfExtensionHandler">GltfExtensionHandler</a>&gt;</h4></section></summary><div class='docblock'>Returns a duplicate of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></div></details><details class="toggle method-toggle" open><summary><section id="method.clone_from" class="method trait-impl"><span class="rightside"><span class="since" title="Stable since Rust version 1.0.0">1.0.0</span> · <a class="src" href="https://doc.rust-lang.org/nightly/src/core/clone.rs.html#245-247">Source</a></span><a href="#method.clone_from" class="anchor">§</a><h4 class="code-header">fn <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from" class="fn">clone_from</a>(&amp;mut self, source: &amp;Self)</h4></section></summary><div class='docblock'>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></div></details></div></details></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"></div><script src="../../../trait.impl/bevy_gltf/loader/extensions/trait.GltfExtensionHandler.js" async></script></section></div></main></body></html>

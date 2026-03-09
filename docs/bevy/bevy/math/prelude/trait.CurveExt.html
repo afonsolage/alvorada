@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Extension trait implemented by curves, allowing access to a number of adaptors and convenience methods."><title>CurveExt in bevy::math::prelude - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b7b9f40b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bevy" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0-nightly (b41f22de2 2026-03-08)" data-channel="nightly" data-search-js="search-63369b7b.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="icon" href="https://bevy.org/assets/icon.png"></head><body class="rustdoc trait"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">CurveExt</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../bevy/index.html"><img src="https://bevy.org/assets/icon.png" alt="logo"></a><h2><a href="../../../bevy/index.html">bevy</a><span class="version">0.18.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Curve<wbr>Ext</a></h2><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.by_ref" title="by_ref">by_ref</a></li><li><a href="#method.chain" title="chain">chain</a></li><li><a href="#method.chain_continue" title="chain_continue">chain_continue</a></li><li><a href="#method.flip" title="flip">flip</a></li><li><a href="#method.forever" title="forever">forever</a></li><li><a href="#method.graph" title="graph">graph</a></li><li><a href="#method.map" title="map">map</a></li><li><a href="#method.ping_pong" title="ping_pong">ping_pong</a></li><li><a href="#method.reparametrize" title="reparametrize">reparametrize</a></li><li><a href="#method.reparametrize_by_curve" title="reparametrize_by_curve">reparametrize_by_curve</a></li><li><a href="#method.reparametrize_linear" title="reparametrize_linear">reparametrize_linear</a></li><li><a href="#method.repeat" title="repeat">repeat</a></li><li><a href="#method.reverse" title="reverse">reverse</a></li><li><a href="#method.sample_iter" title="sample_iter">sample_iter</a></li><li><a href="#method.sample_iter_clamped" title="sample_iter_clamped">sample_iter_clamped</a></li><li><a href="#method.sample_iter_unchecked" title="sample_iter_unchecked">sample_iter_unchecked</a></li><li><a href="#method.samples" title="samples">samples</a></li><li><a href="#method.zip" title="zip">zip</a></li></ul><h3><a href="#dyn-compatibility">Dyn Compatibility</a></h3><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2><a href="index.html">In bevy::<wbr>math::<wbr>prelude</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">bevy</a>::<wbr><a href="../index.html">math</a>::<wbr><a href="index.html">prelude</a></div><h1>Trait <span class="trait">Curve<wbr>Ext</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>pub trait CurveExt&lt;T&gt;: <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> + <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt; {
+<details class="toggle type-contents-toggle"><summary class="hideme"><span>Show 18 methods</span></summary>    // Provided methods
+    fn <a href="#method.sample_iter" class="fn">sample_iter</a>(
+        &amp;self,
+        iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.sample_iter_unchecked" class="fn">sample_iter_unchecked</a>(
+        &amp;self,
+        iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.sample_iter_clamped" class="fn">sample_iter_clamped</a>(
+        &amp;self,
+        iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+    ) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.map" class="fn">map</a>&lt;S, F&gt;(self, f: F) -&gt; <a class="struct" href="../../prelude/struct.MapCurve.html" title="struct bevy::prelude::MapCurve">MapCurve</a>&lt;T, S, Self, F&gt;
+       <span class="where">where F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(T) -&gt; S</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.reparametrize" class="fn">reparametrize</a>&lt;F&gt;(
+        self,
+        domain: <a class="struct" href="../../prelude/struct.Interval.html" title="struct bevy::prelude::Interval">Interval</a>,
+        f: F,
+    ) -&gt; <a class="struct" href="../../prelude/struct.ReparamCurve.html" title="struct bevy::prelude::ReparamCurve">ReparamCurve</a>&lt;T, Self, F&gt;
+       <span class="where">where F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a></span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.reparametrize_linear" class="fn">reparametrize_linear</a>(
+        self,
+        domain: <a class="struct" href="../../prelude/struct.Interval.html" title="struct bevy::prelude::Interval">Interval</a>,
+    ) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.LinearReparamCurve.html" title="struct bevy::prelude::LinearReparamCurve">LinearReparamCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.LinearReparamError.html" title="enum bevy::prelude::LinearReparamError">LinearReparamError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.reparametrize_by_curve" class="fn">reparametrize_by_curve</a>&lt;C&gt;(
+        self,
+        other: C,
+    ) -&gt; <a class="struct" href="../../prelude/struct.CurveReparamCurve.html" title="struct bevy::prelude::CurveReparamCurve">CurveReparamCurve</a>&lt;T, Self, C&gt;
+       <span class="where">where C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.graph" class="fn">graph</a>(self) -&gt; <a class="struct" href="../../prelude/struct.GraphCurve.html" title="struct bevy::prelude::GraphCurve">GraphCurve</a>&lt;T, Self&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.zip" class="fn">zip</a>&lt;S, C&gt;(
+        self,
+        other: C,
+    ) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ZipCurve.html" title="struct bevy::prelude::ZipCurve">ZipCurve</a>&lt;T, S, Self, C&gt;, <a class="struct" href="../../prelude/interval/struct.InvalidIntervalError.html" title="struct bevy::prelude::interval::InvalidIntervalError">InvalidIntervalError</a>&gt;
+       <span class="where">where C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;S&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.chain" class="fn">chain</a>&lt;C&gt;(self, other: C) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ChainCurve.html" title="struct bevy::prelude::ChainCurve">ChainCurve</a>&lt;T, Self, C&gt;, <a class="enum" href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError">ChainError</a>&gt;
+       <span class="where">where C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.reverse" class="fn">reverse</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ReverseCurve.html" title="struct bevy::prelude::ReverseCurve">ReverseCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.ReverseError.html" title="enum bevy::prelude::ReverseError">ReverseError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.repeat" class="fn">repeat</a>(self, count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.RepeatCurve.html" title="struct bevy::prelude::RepeatCurve">RepeatCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError">RepeatError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.forever" class="fn">forever</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ForeverCurve.html" title="struct bevy::prelude::ForeverCurve">ForeverCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError">RepeatError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.ping_pong" class="fn">ping_pong</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.PingPongCurve.html" title="struct bevy::prelude::PingPongCurve">PingPongCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.PingPongError.html" title="enum bevy::prelude::PingPongError">PingPongError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.chain_continue" class="fn">chain_continue</a>&lt;C&gt;(
+        self,
+        other: C,
+    ) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ContinuationCurve.html" title="struct bevy::prelude::ContinuationCurve">ContinuationCurve</a>&lt;T, Self, C&gt;, <a class="enum" href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError">ChainError</a>&gt;
+       <span class="where">where T: <a class="trait" href="../trait.VectorSpace.html" title="trait bevy::math::VectorSpace">VectorSpace</a>,
+             C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt;</span> { ... }
+<span class="item-spacer"></span>    fn <a href="#method.samples" class="fn">samples</a>(
+        &amp;self,
+        samples: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>,
+    ) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt;, <a class="enum" href="../../prelude/enum.ResamplingError.html" title="enum bevy::prelude::ResamplingError">ResamplingError</a>&gt; { ... }
+<span class="item-spacer"></span>    fn <a href="#method.by_ref" class="fn">by_ref</a>(&amp;self) -&gt; &amp;Self { ... }
+<span class="item-spacer"></span>    fn <a href="#method.flip" class="fn">flip</a>&lt;U, V&gt;(self) -&gt; impl <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(V, U)</a>&gt;
+       <span class="where">where Self: <a class="trait" href="../../prelude/trait.CurveExt.html" title="trait bevy::prelude::CurveExt">CurveExt</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(U, V)</a>&gt;</span> { ... }
+</details>}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Extension trait implemented by <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">curves</a>, allowing access to a number of adaptors and
+convenience methods.</p>
+<p>This trait is automatically implemented for all curves that are <code>Sized</code>. In particular,
+it is implemented for types like <code>Box&lt;dyn Curve&lt;T&gt;&gt;</code>. <code>CurveExt</code> is not dyn-compatible
+itself.</p>
+<p>For more information, see the <a href="../curve/index.html" title="mod bevy::math::curve">module-level documentation</a>.</p>
+</div></details><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.sample_iter" class="method"><h4 class="code-header">fn <a href="#method.sample_iter" class="fn">sample_iter</a>(
+    &amp;self,
+    iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;T&gt;&gt;</h4></section></summary><div class="docblock"><p>Sample a collection of <code>n &gt;= 0</code> points on this curve at the parameter values <code>t_n</code>,
+returning <code>None</code> if the point is outside of the curve’s domain.</p>
+<p>The samples are returned in the same order as the parameter values <code>t_n</code> were provided and
+will include all results. This leaves the responsibility for things like filtering and
+sorting to the user for maximum flexibility.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.sample_iter_unchecked" class="method"><h4 class="code-header">fn <a href="#method.sample_iter_unchecked" class="fn">sample_iter_unchecked</a>(
+    &amp;self,
+    iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt;</h4></section></summary><div class="docblock"><p>Sample a collection of <code>n &gt;= 0</code> points on this curve at the parameter values <code>t_n</code>,
+extracting the associated values. This is the unchecked version of sampling, which should
+only be used if the sample times <code>t_n</code> are already known to lie within the curve’s domain.</p>
+<p>Values sampled from outside of a curve’s domain are generally considered invalid; data
+which is nonsensical or otherwise useless may be returned in such a circumstance, and
+extrapolation beyond a curve’s domain should not be relied upon.</p>
+<p>The samples are returned in the same order as the parameter values <code>t_n</code> were provided and
+will include all results. This leaves the responsibility for things like filtering and
+sorting to the user for maximum flexibility.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.sample_iter_clamped" class="method"><h4 class="code-header">fn <a href="#method.sample_iter_clamped" class="fn">sample_iter_clamped</a>(
+    &amp;self,
+    iter: impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/collect/trait.IntoIterator.html" title="trait core::iter::traits::collect::IntoIterator">IntoIterator</a>&lt;Item = <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,
+) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt;</h4></section></summary><div class="docblock"><p>Sample a collection of <code>n &gt;= 0</code> points on this curve at the parameter values <code>t_n</code>,
+clamping <code>t_n</code> to lie inside the domain of the curve.</p>
+<p>The samples are returned in the same order as the parameter values <code>t_n</code> were provided and
+will include all results. This leaves the responsibility for things like filtering and
+sorting to the user for maximum flexibility.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.map" class="method"><h4 class="code-header">fn <a href="#method.map" class="fn">map</a>&lt;S, F&gt;(self, f: F) -&gt; <a class="struct" href="../../prelude/struct.MapCurve.html" title="struct bevy::prelude::MapCurve">MapCurve</a>&lt;T, S, Self, F&gt;<div class="where">where
+    F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(T) -&gt; S,</div></h4></section></summary><div class="docblock"><p>Create a new curve by mapping the values of this curve via a function <code>f</code>; i.e., if the
+sample at time <code>t</code> for this curve is <code>x</code>, the value at time <code>t</code> on the new curve will be
+<code>f(x)</code>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.reparametrize" class="method"><h4 class="code-header">fn <a href="#method.reparametrize" class="fn">reparametrize</a>&lt;F&gt;(self, domain: <a class="struct" href="../../prelude/struct.Interval.html" title="struct bevy::prelude::Interval">Interval</a>, f: F) -&gt; <a class="struct" href="../../prelude/struct.ReparamCurve.html" title="struct bevy::prelude::ReparamCurve">ReparamCurve</a>&lt;T, Self, F&gt;<div class="where">where
+    F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>,</div></h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> whose parameter space is related to the parameter space of this curve
+by <code>f</code>. For each time <code>t</code>, the sample from the new curve at time <code>t</code> is the sample from
+this curve at time <code>f(t)</code>. The given <code>domain</code> will be the domain of the new curve. The
+function <code>f</code> is expected to take <code>domain</code> into <code>self.domain()</code>.</p>
+<p>Note that this is the opposite of what one might expect intuitively; for example, if this
+curve has a parameter domain of <code>[0, 1]</code>, then stretching the parameter domain to
+<code>[0, 2]</code> would be performed as follows, dividing by what might be perceived as the scaling
+factor rather than multiplying:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>my_curve = ConstantCurve::new(Interval::UNIT, <span class="number">1.0</span>);
+<span class="kw">let </span>scaled_curve = my_curve.reparametrize(interval(<span class="number">0.0</span>, <span class="number">2.0</span>).unwrap(), |t| t / <span class="number">2.0</span>);</code></pre></div>
+<p>This kind of linear remapping is provided by the convenience method
+<a href="../../prelude/trait.CurveExt.html#method.reparametrize_linear" title="method bevy::prelude::CurveExt::reparametrize_linear"><code>CurveExt::reparametrize_linear</code></a>, which requires only the desired domain for the new curve.</p>
+<h5 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Reverse a curve:
+</span><span class="kw">let </span>my_curve = ConstantCurve::new(Interval::UNIT, <span class="number">1.0</span>);
+<span class="kw">let </span>domain = my_curve.domain();
+<span class="kw">let </span>reversed_curve = my_curve.reparametrize(domain, |t| domain.end() - (t - domain.start()));
+
+<span class="comment">// Take a segment of a curve:
+</span><span class="kw">let </span>curve_segment = my_curve.reparametrize(interval(<span class="number">0.0</span>, <span class="number">0.5</span>).unwrap(), |t| <span class="number">0.5 </span>+ t);</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.reparametrize_linear" class="method"><h4 class="code-header">fn <a href="#method.reparametrize_linear" class="fn">reparametrize_linear</a>(
+    self,
+    domain: <a class="struct" href="../../prelude/struct.Interval.html" title="struct bevy::prelude::Interval">Interval</a>,
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.LinearReparamCurve.html" title="struct bevy::prelude::LinearReparamCurve">LinearReparamCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.LinearReparamError.html" title="enum bevy::prelude::LinearReparamError">LinearReparamError</a>&gt;</h4></section></summary><div class="docblock"><p>Linearly reparametrize this <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a>, producing a new curve whose domain is the given
+<code>domain</code> instead of the current one. This operation is only valid for curves with bounded
+domains.</p>
+<h5 id="errors"><a class="doc-anchor" href="#errors">§</a>Errors</h5>
+<p>If either this curve’s domain or the given <code>domain</code> is unbounded, an error is returned.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.reparametrize_by_curve" class="method"><h4 class="code-header">fn <a href="#method.reparametrize_by_curve" class="fn">reparametrize_by_curve</a>&lt;C&gt;(self, other: C) -&gt; <a class="struct" href="../../prelude/struct.CurveReparamCurve.html" title="struct bevy::prelude::CurveReparamCurve">CurveReparamCurve</a>&lt;T, Self, C&gt;<div class="where">where
+    C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.f32.html">f32</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Reparametrize this <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> by sampling from another curve.</p>
+<p>The resulting curve samples at time <code>t</code> by first sampling <code>other</code> at time <code>t</code>, which produces
+another sample time <code>s</code> which is then used to sample this curve. The domain of the resulting
+curve is the domain of <code>other</code>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.graph" class="method"><h4 class="code-header">fn <a href="#method.graph" class="fn">graph</a>(self) -&gt; <a class="struct" href="../../prelude/struct.GraphCurve.html" title="struct bevy::prelude::GraphCurve">GraphCurve</a>&lt;T, Self&gt;</h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> which is the graph of this one; that is, its output echoes the sample
+time as part of a tuple.</p>
+<p>For example, if this curve outputs <code>x</code> at time <code>t</code>, then the produced curve will produce
+<code>(t, x)</code> at time <code>t</code>. In particular, if this curve is a <code>Curve&lt;T&gt;</code>, the output of this method
+is a <code>Curve&lt;(f32, T)&gt;</code>.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.zip" class="method"><h4 class="code-header">fn <a href="#method.zip" class="fn">zip</a>&lt;S, C&gt;(
+    self,
+    other: C,
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ZipCurve.html" title="struct bevy::prelude::ZipCurve">ZipCurve</a>&lt;T, S, Self, C&gt;, <a class="struct" href="../../prelude/interval/struct.InvalidIntervalError.html" title="struct bevy::prelude::interval::InvalidIntervalError">InvalidIntervalError</a>&gt;<div class="where">where
+    C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;S&gt;,</div></h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> by zipping this curve together with another.</p>
+<p>The sample at time <code>t</code> in the new curve is <code>(x, y)</code>, where <code>x</code> is the sample of <code>self</code> at
+time <code>t</code> and <code>y</code> is the sample of <code>other</code> at time <code>t</code>. The domain of the new curve is the
+intersection of the domains of its constituents.</p>
+<h5 id="errors-1"><a class="doc-anchor" href="#errors-1">§</a>Errors</h5>
+<p>If the domain intersection would be empty, an error is returned instead.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.chain" class="method"><h4 class="code-header">fn <a href="#method.chain" class="fn">chain</a>&lt;C&gt;(self, other: C) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ChainCurve.html" title="struct bevy::prelude::ChainCurve">ChainCurve</a>&lt;T, Self, C&gt;, <a class="enum" href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError">ChainError</a>&gt;<div class="where">where
+    C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt;,</div></h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> by composing this curve end-to-start with another, producing another curve
+with outputs of the same type. The domain of the other curve is translated so that its start
+coincides with where this curve ends.</p>
+<h5 id="errors-2"><a class="doc-anchor" href="#errors-2">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError"><code>ChainError</code></a> is returned if this curve’s domain doesn’t have a finite end or if
+<code>other</code>’s domain doesn’t have a finite start.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.reverse" class="method"><h4 class="code-header">fn <a href="#method.reverse" class="fn">reverse</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ReverseCurve.html" title="struct bevy::prelude::ReverseCurve">ReverseCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.ReverseError.html" title="enum bevy::prelude::ReverseError">ReverseError</a>&gt;</h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> inverting this curve on the x-axis, producing another curve with
+outputs of the same type, effectively playing backwards starting at <code>self.domain().end()</code>
+and transitioning over to <code>self.domain().start()</code>. The domain of the new curve is still the
+same.</p>
+<h5 id="errors-3"><a class="doc-anchor" href="#errors-3">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.ReverseError.html" title="enum bevy::prelude::ReverseError"><code>ReverseError</code></a> is returned if this curve’s domain isn’t bounded.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.repeat" class="method"><h4 class="code-header">fn <a href="#method.repeat" class="fn">repeat</a>(self, count: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.RepeatCurve.html" title="struct bevy::prelude::RepeatCurve">RepeatCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError">RepeatError</a>&gt;</h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> repeating this curve <code>N</code> times, producing another curve with outputs
+of the same type. The domain of the new curve will be bigger by a factor of <code>n + 1</code>.</p>
+<h5 id="notes"><a class="doc-anchor" href="#notes">§</a>Notes</h5>
+<ul>
+<li>this doesn’t guarantee a smooth transition from one occurrence of the curve to its next
+iteration. The curve will make a jump if <code>self.domain().start() != self.domain().end()</code>!</li>
+<li>for <code>count == 0</code> the output of this adaptor is basically identical to the previous curve</li>
+<li>the value at the transitioning points (<code>domain.end() * n</code> for <code>n &gt;= 1</code>) in the results is the
+value at <code>domain.end()</code> in the original curve</li>
+</ul>
+<h5 id="errors-4"><a class="doc-anchor" href="#errors-4">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError"><code>RepeatError</code></a> is returned if this curve’s domain isn’t bounded.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.forever" class="method"><h4 class="code-header">fn <a href="#method.forever" class="fn">forever</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ForeverCurve.html" title="struct bevy::prelude::ForeverCurve">ForeverCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError">RepeatError</a>&gt;</h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> repeating this curve forever, producing another curve with
+outputs of the same type. The domain of the new curve will be unbounded.</p>
+<h5 id="notes-1"><a class="doc-anchor" href="#notes-1">§</a>Notes</h5>
+<ul>
+<li>this doesn’t guarantee a smooth transition from one occurrence of the curve to its next
+iteration. The curve will make a jump if <code>self.domain().start() != self.domain().end()</code>!</li>
+<li>the value at the transitioning points (<code>domain.end() * n</code> for <code>n &gt;= 1</code>) in the results is the
+value at <code>domain.end()</code> in the original curve</li>
+</ul>
+<h5 id="errors-5"><a class="doc-anchor" href="#errors-5">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.RepeatError.html" title="enum bevy::prelude::RepeatError"><code>RepeatError</code></a> is returned if this curve’s domain isn’t bounded.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.ping_pong" class="method"><h4 class="code-header">fn <a href="#method.ping_pong" class="fn">ping_pong</a>(self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.PingPongCurve.html" title="struct bevy::prelude::PingPongCurve">PingPongCurve</a>&lt;T, Self&gt;, <a class="enum" href="../../prelude/enum.PingPongError.html" title="enum bevy::prelude::PingPongError">PingPongError</a>&gt;</h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> chaining the original curve with its inverse, producing
+another curve with outputs of the same type. The domain of the new curve will be twice as
+long. The transition point is guaranteed to not make any jumps.</p>
+<h5 id="errors-6"><a class="doc-anchor" href="#errors-6">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.PingPongError.html" title="enum bevy::prelude::PingPongError"><code>PingPongError</code></a> is returned if this curve’s domain isn’t right-finite.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.chain_continue" class="method"><h4 class="code-header">fn <a href="#method.chain_continue" class="fn">chain_continue</a>&lt;C&gt;(
+    self,
+    other: C,
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../prelude/struct.ContinuationCurve.html" title="struct bevy::prelude::ContinuationCurve">ContinuationCurve</a>&lt;T, Self, C&gt;, <a class="enum" href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError">ChainError</a>&gt;<div class="where">where
+    T: <a class="trait" href="../trait.VectorSpace.html" title="trait bevy::math::VectorSpace">VectorSpace</a>,
+    C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt;,</div></h4></section></summary><div class="docblock"><p>Create a new <a href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve"><code>Curve</code></a> by composing this curve end-to-start with another, producing another
+curve with outputs of the same type. The domain of the other curve is translated so that
+its start coincides with where this curve ends.</p>
+<p>Additionally the transition of the samples is guaranteed to make no sudden jumps. This is
+useful if you really just know about the shapes of your curves and don’t want to deal with
+stitching them together properly when it would just introduce useless complexity. It is
+realized by translating the other curve so that its start sample point coincides with the
+current curves’ end sample point.</p>
+<h5 id="errors-7"><a class="doc-anchor" href="#errors-7">§</a>Errors</h5>
+<p>A <a href="../../prelude/enum.ChainError.html" title="enum bevy::prelude::ChainError"><code>ChainError</code></a> is returned if this curve’s domain doesn’t have a finite end or if
+<code>other</code>’s domain doesn’t have a finite start.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.samples" class="method"><h4 class="code-header">fn <a href="#method.samples" class="fn">samples</a>(
+    &amp;self,
+    samples: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>,
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/iter/traits/iterator/trait.Iterator.html" title="trait core::iter::traits::iterator::Iterator">Iterator</a>&lt;Item = T&gt;, <a class="enum" href="../../prelude/enum.ResamplingError.html" title="enum bevy::prelude::ResamplingError">ResamplingError</a>&gt;</h4></section></summary><div class="docblock"><p>Extract an iterator over evenly-spaced samples from this curve.</p>
+<h5 id="errors-8"><a class="doc-anchor" href="#errors-8">§</a>Errors</h5>
+<p>If <code>samples</code> is less than 2 or if this curve has unbounded domain, a <a href="../../prelude/enum.ResamplingError.html" title="enum bevy::prelude::ResamplingError"><code>ResamplingError</code></a>
+is returned.</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="method.by_ref" class="method"><h4 class="code-header">fn <a href="#method.by_ref" class="fn">by_ref</a>(&amp;self) -&gt; &amp;Self</h4></section></summary><div class="docblock"><p>Borrow this curve rather than taking ownership of it. This is essentially an alias for a
+prefix <code>&amp;</code>; the point is that intermediate operations can be performed while retaining
+access to the original curve.</p>
+<h5 id="example"><a class="doc-anchor" href="#example">§</a>Example</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>my_curve = FunctionCurve::new(Interval::UNIT, |t| t * t + <span class="number">1.0</span>);
+
+<span class="comment">// Borrow `my_curve` long enough to resample a mapped version. Note that `map` takes
+// ownership of its input.
+</span><span class="kw">let </span>samples = my_curve.by_ref().map(|x| x * <span class="number">2.0</span>).resample_auto(<span class="number">100</span>).unwrap();
+
+<span class="comment">// Do something else with `my_curve` since we retained ownership:
+</span><span class="kw">let </span>new_curve = my_curve.reparametrize_linear(interval(-<span class="number">1.0</span>, <span class="number">1.0</span>).unwrap()).unwrap();</code></pre></div></div></details><details class="toggle method-toggle" open><summary><section id="method.flip" class="method"><h4 class="code-header">fn <a href="#method.flip" class="fn">flip</a>&lt;U, V&gt;(self) -&gt; impl <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(V, U)</a>&gt;<div class="where">where
+    Self: <a class="trait" href="../../prelude/trait.CurveExt.html" title="trait bevy::prelude::CurveExt">CurveExt</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(U, V)</a>&gt;,</div></h4></section></summary><div class="docblock"><p>Flip this curve so that its tuple output is arranged the other way.</p>
+</div></details></div><h2 id="dyn-compatibility" class="section-header">Dyn Compatibility<a href="#dyn-compatibility" class="anchor">§</a></h2><div class="dyn-compatibility-info"><p>This trait is <b>not</b> <a href="https://doc.rust-lang.org/nightly/reference/items/traits.html#dyn-compatibility">dyn compatible</a>.</p><p><i>In older versions of Rust, dyn compatibility was called "object safety", so this trait is not object safe.</i></p></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"><div class="negative-marker"></div><section id="impl-CurveExt%3CT%3E-for-C" class="impl"><a href="#impl-CurveExt%3CT%3E-for-C" class="anchor">§</a><h3 class="code-header">impl&lt;C, T&gt; <a class="trait" href="../../prelude/trait.CurveExt.html" title="trait bevy::prelude::CurveExt">CurveExt</a>&lt;T&gt; for C<div class="where">where
+    C: <a class="trait" href="../../prelude/trait.Curve.html" title="trait bevy::prelude::Curve">Curve</a>&lt;T&gt;,</div></h3></section></div><script src="../../../trait.impl/bevy_math/curve/trait.CurveExt.js" async></script></section></div></main></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["TemporalAntiAliasHistoryTextures","TemporalAntiAliasNode","TemporalAntiAliasPipelineId","TemporalAntiAliasPlugin","TemporalAntiAliasing"]};

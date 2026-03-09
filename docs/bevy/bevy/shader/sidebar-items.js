@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PipelineCacheError","ShaderCacheSource","ShaderDefVal","ShaderImport","ShaderLoaderError","ShaderRef","ShaderReflectError","Source","ValidateShader"],"macro":["load_shader_library"],"mod":["prelude"],"struct":["Shader","ShaderCache","ShaderId","ShaderLoader","ShaderSettings"],"type":["CachedPipelineId"]};

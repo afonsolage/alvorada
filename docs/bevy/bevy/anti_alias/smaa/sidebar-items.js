@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SmaaPreset"],"fn":["init_smaa_pipelines"],"struct":["Smaa","SmaaBindGroups","SmaaInfoUniform","SmaaInfoUniformBuffer","SmaaInfoUniformOffset","SmaaNeighborhoodBlendingPipelineKey","SmaaNode","SmaaPipelines","SmaaPlugin","SmaaSpecializedRenderPipelines","SmaaTextures","ViewSmaaPipelines"]};

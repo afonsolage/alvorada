@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["RenderMeshBufferInfo"],"fn":["inherit_weights"],"mod":["allocator"],"struct":["MeshRenderAssetPlugin","MorphPlugin","RenderMesh"]};

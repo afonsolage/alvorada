@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PlaybackMode","SeekError","Volume"],"mod":["prelude"],"struct":["AudioLoader","AudioPlayer","AudioPlugin","AudioSink","AudioSource","DefaultSpatialScale","GlobalVolume","Pitch","PlaybackSettings","SpatialAudioSink","SpatialListener","SpatialScale"],"trait":["AddAudioSource","AudioSinkPlayback","CpalSample","Decodable","Sample","Source"]};

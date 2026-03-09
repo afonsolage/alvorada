@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["init_blit_pipeline"],"struct":["BlitPipeline","BlitPipelineKey","BlitPlugin"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["init_screenshot_to_screen_pipeline","save_to_disk","trigger_screenshots"],"struct":["Captured","CapturedScreenshots","Capturing","Screenshot","ScreenshotCaptured","ScreenshotPlugin","ScreenshotToScreenPipeline"]};

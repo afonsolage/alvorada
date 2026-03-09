@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["extract_shadows","init_box_shadow_pipeline","prepare_shadows","queue_shadows"],"struct":["BoxShadowMeta","BoxShadowPipeline","BoxShadowPipelineKey","BoxShadowPlugin","DrawBoxShadow","ExtractedBoxShadow","ExtractedBoxShadows","SetBoxShadowViewBindGroup","UiShadowsBatch"],"type":["DrawBoxShadows"]};

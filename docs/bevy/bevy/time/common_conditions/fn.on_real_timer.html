@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Run condition that is active on a regular time interval, using `Time&#60;Real&#62;` to advance the timer. The timer ticks are not scaled."><title>on_real_timer in bevy::time::common_conditions - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-b7b9f40b.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="bevy" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0-nightly (b41f22de2 2026-03-08)" data-channel="nightly" data-search-js="search-63369b7b.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="icon" href="https://bevy.org/assets/icon.png"></head><body class="rustdoc fn"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">on_real_timer</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../bevy/index.html"><img src="https://bevy.org/assets/icon.png" alt="logo"></a><h2><a href="../../../bevy/index.html">bevy</a><span class="version">0.18.1</span></h2></div><div class="sidebar-elems"><div id="rustdoc-modnav"><h2><a href="index.html">In bevy::<wbr>time::<wbr>common_<wbr>conditions</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">bevy</a>::<wbr><a href="../index.html">time</a>::<wbr><a href="index.html">common_conditions</a></div><h1>Function <span class="fn">on_<wbr>real_<wbr>timer</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>pub fn on_real_timer(
+    duration: <a class="struct" href="https://doc.rust-lang.org/nightly/core/time/struct.Duration.html" title="struct core::time::Duration">Duration</a>,
+) -&gt; impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnMut.html" title="trait core::ops::function::FnMut">FnMut</a>(<a class="struct" href="../../prelude/struct.Res.html" title="struct bevy::prelude::Res">Res</a>&lt;'_, <a class="struct" href="../../prelude/struct.Time.html" title="struct bevy::prelude::Time">Time</a>&lt;<a class="struct" href="../../prelude/struct.Real.html" title="struct bevy::prelude::Real">Real</a>&gt;&gt;) + <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Run condition that is active on a regular time interval,
+using <a href="../../prelude/struct.Time.html" title="struct bevy::prelude::Time"><code>Time&lt;Real&gt;</code></a> to advance the timer.
+The timer ticks are not scaled.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">fn </span>main() {
+    App::new()
+        .add_plugins(DefaultPlugins)
+        .add_systems(
+            Update,
+            tick.run_if(on_real_timer(Duration::from_secs(<span class="number">1</span>))),
+        )
+        .run();
+}
+<span class="kw">fn </span>tick() {
+    <span class="comment">// ran once a second
+</span>}</code></pre></div>
+<p>Note that this does <strong>not</strong> guarantee that systems will run at exactly the
+specified interval. If delta time is larger than the specified <code>duration</code> then
+the system will only run once even though the timer may have completed multiple
+times. This condition should only be used with large time durations (relative to
+delta time).</p>
+<p>For more accurate timers, use the <a href="../../prelude/struct.Timer.html" title="struct bevy::prelude::Timer"><code>Timer</code></a> class directly (see
+<a href="../../prelude/struct.Timer.html#method.times_finished_this_tick" title="method bevy::prelude::Timer::times_finished_this_tick"><code>Timer::times_finished_this_tick</code></a> to address the problem mentioned above), or
+use fixed timesteps that allow systems to run multiple times per frame.</p>
+</div></details></section></div></main></body></html>

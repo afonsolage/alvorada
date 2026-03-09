@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["PrepareAssetError"],"fn":["prepare_erased_assets"],"struct":["AssetExtractionSystems","ErasedRenderAssetPlugin","ErasedRenderAssets","ExtractedAssets","PrepareNextFrameAssets"],"trait":["ErasedRenderAsset","ErasedRenderAssetDependency"]};

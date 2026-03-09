@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["MissingRenderTargetInfoError"],"fn":["camera_system","extract_cameras","sort_cameras"],"struct":["CameraPlugin","CameraRenderGraph","ExtractedCamera","MipBias","SortedCamera","SortedCameras","TemporalJitter"],"trait":["NormalizedRenderTargetExt"]};

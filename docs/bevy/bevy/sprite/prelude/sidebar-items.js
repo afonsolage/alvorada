@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SliceScaleMode","SpriteImageMode","SpritePickingMode","SpriteScalingMode"],"struct":["BorderRect","Sprite","SpritePickingCamera","SpritePickingPlugin","SpritePickingSettings","Text2d","TextureSlice","TextureSlicer"],"type":["Text2dReader","Text2dWriter"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ImageFormat","TextureError"],"struct":["DynamicTextureAtlasBuilder","Image","ImagePlugin","TextureAtlas","TextureAtlasBuilder","TextureAtlasLayout","TextureAtlasSources"],"trait":["_"]};
