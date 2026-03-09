@@ -85,6 +85,9 @@ fn spawn_player(
 /// Movement is blocked when the destination tile is impassable (water).
 /// On passable tiles the effective speed is `PLAYER_BASE_SPEED / movement_cost`,
 /// so sand and forest tiles feel slower than open grassland.
+///
+/// Collision is resolved per-axis so the player can slide smoothly along
+/// impassable boundaries instead of stopping dead on contact.
 pub fn player_movement(
     time: Res<Time>,
     keys: Res<ButtonInput<KeyCode>>,
@@ -128,14 +131,26 @@ pub fn player_movement(
         .unwrap_or(1.0); // Outside map bounds: allow free movement.
 
     let delta = direction * PLAYER_BASE_SPEED * speed_factor * time.delta_secs();
-    let new_pos = transform.translation + delta.extend(0.0);
+    let new_pos = current_pos + delta;
 
-    // --- Block movement into impassable tiles --------------------------------
-    let can_move = Map::world_to_tile(new_pos.truncate())
-        .map(|(tx, ty)| map.get(tx, ty).is_passable())
-        .unwrap_or(false); // Outside map boundary is also impassable.
+    // --- Axis-separated collision against impassable tiles -------------------
+    // Try the full move first; if blocked, fall back to each axis independently
+    // so the player slides smoothly along coastlines and walls.
+    let is_passable = |pos: Vec2| {
+        Map::world_to_tile(pos)
+            .map(|(tx, ty)| map.get(tx, ty).is_passable())
+            .unwrap_or(false) // Outside map boundary is also impassable.
+    };
 
-    if can_move {
-        transform.translation = new_pos;
-    }
+    let final_pos = if is_passable(new_pos) {
+        new_pos
+    } else if is_passable(Vec2::new(new_pos.x, current_pos.y)) {
+        Vec2::new(new_pos.x, current_pos.y)
+    } else if is_passable(Vec2::new(current_pos.x, new_pos.y)) {
+        Vec2::new(current_pos.x, new_pos.y)
+    } else {
+        current_pos
+    };
+
+    transform.translation = final_pos.extend(transform.translation.z);
 }
