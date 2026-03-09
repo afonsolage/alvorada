@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["AppExit","RunFixedMainLoopSystems"],"struct":["App","First","FixedFirst","FixedLast","FixedPostUpdate","FixedPreUpdate","FixedUpdate","Last","Main","PostStartup","PostUpdate","PreStartup","PreUpdate","RunFixedMainLoop","SpawnScene","Startup","SubApp","TaskPoolOptions","TaskPoolPlugin","Update"],"trait":["Plugin","PluginGroup"]};

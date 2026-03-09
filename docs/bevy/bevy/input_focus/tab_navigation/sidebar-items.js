@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["NavAction","TabNavigationError"],"fn":["handle_tab_navigation"],"struct":["TabGroup","TabIndex","TabNavigationPlugin"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["init_cas_pipeline"],"struct":["CasNode","CasPipeline","CasPipelineKey","CasPipelineSpecializer","CasPlugin","ContrastAdaptiveSharpening","DenoiseCas","ViewCasPipeline"]};

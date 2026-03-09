@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["PickingInteraction"],"fn":["generate_hovermap","update_interactions","update_is_directly_hovered","update_is_hovered"],"struct":["DirectlyHovered","HoverMap","Hovered","PreviousHoverMap"]};

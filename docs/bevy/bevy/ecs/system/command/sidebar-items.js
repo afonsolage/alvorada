@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["init_resource","insert_batch","insert_resource","remove_resource","run_schedule","run_system","run_system_cached","run_system_cached_with","run_system_with","spawn_batch","trigger","trigger_with","unregister_system","unregister_system_cached","write_message"],"trait":["Command"]};

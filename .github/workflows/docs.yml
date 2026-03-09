@@ -41,13 +41,13 @@ jobs:
           sudo apt-get install -y pkg-config libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev
 
       - name: Generate Bevy documentation
-        run: cargo doc --no-deps -p bevy
+        run: cargo rustdoc -p bevy -- -Z unstable-options --output-format json
 
       - name: Update docs/bevy
         run: |
           rm -rf docs/bevy
-          mkdir -p docs
-          cp -r target/doc docs/bevy
+          mkdir -p docs/bevy
+          cp target/doc/bevy.json docs/bevy/bevy.json
 
       - name: Commit and push documentation
         run: |

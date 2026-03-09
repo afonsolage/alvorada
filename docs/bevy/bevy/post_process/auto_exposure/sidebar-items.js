@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["AutoExposureCompensationCurveError"],"fn":["init_auto_exposure_resources"],"struct":["AutoExposure","AutoExposureCompensationCurve","AutoExposurePlugin"]};

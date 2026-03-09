@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["ErasedRenderAssetDiagnosticPlugin","MeshAllocatorDiagnosticPlugin","PassSpanGuard","RenderAssetDiagnosticPlugin","RenderDiagnosticsPlugin","TimeSpanGuard"],"trait":["RecordDiagnostics"]};

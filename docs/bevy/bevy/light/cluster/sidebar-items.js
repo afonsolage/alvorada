@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["ClusterConfig","ClusterFarZMode"],"fn":["add_clusters"],"mod":["assign"],"struct":["ClusterVisibilityClass","ClusterZConfig","ClusterableObjectCounts","ClusteredDecal","Clusters","GlobalClusterSettings","GlobalVisibleClusterableObjects","VisibleClusterableObjects"]};

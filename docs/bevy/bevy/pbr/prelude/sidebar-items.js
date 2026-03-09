@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["FogFalloff","ParallaxMappingMethod"],"struct":["DistanceFog","MaterialPlugin","MeshMaterial3d","ScreenSpaceAmbientOcclusionPlugin","StandardMaterial"],"trait":["Material"]};

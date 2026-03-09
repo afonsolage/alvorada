@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["PickingSystems","PointerId"],"struct":["HitData","Pickable","PointerHits","PointerLocation","RayMap"]};

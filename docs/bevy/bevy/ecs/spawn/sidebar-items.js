@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["Spawn","SpawnIter","SpawnOneRelated","SpawnRelatedBundle","SpawnWith","WithOneRelated","WithRelated"],"trait":["SpawnRelated","SpawnableList"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"constant":["CHECK_TICK_THRESHOLD","MAX_CHANGE_AGE"],"struct":["CheckChangeTicks","ComponentTickCells","ComponentTicks","MaybeLocation","Mut","MutUntyped","NonSend","NonSendMut","Ref","Res","ResMut","Tick"],"trait":["DetectChanges","DetectChangesMut"]};

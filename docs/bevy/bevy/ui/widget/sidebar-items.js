@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["NodeImageMode"],"fn":["measure_text_system","text_system","update_image_content_size_system","update_viewport_render_target_size","viewport_picking"],"struct":["Button","ImageMeasure","ImageNode","ImageNodeSize","Label","Text","TextMeasure","TextNodeFlags","TextShadow","ViewportNode"],"type":["TextUiReader","TextUiWriter"]};

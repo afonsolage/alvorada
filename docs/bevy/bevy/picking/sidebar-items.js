@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["PickingSystems"],"mod":["backend","events","hover","input","mesh_picking","pointer","prelude","window"],"struct":["DefaultPickingPlugins","InteractionPlugin","Pickable","PickingPlugin","PickingSettings"]};

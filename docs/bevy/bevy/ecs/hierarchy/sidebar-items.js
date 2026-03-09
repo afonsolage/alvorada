@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["validate_parent_has_component"],"struct":["ChildOf","Children"],"type":["ChildSpawner","ChildSpawnerCommands"]};

@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"derive":["EntityEvent","Event"],"fn":["trigger_entity_internal"],"struct":["EntityComponentsTrigger","EntityTrigger","EventKey","GlobalTrigger","PropagateEntityTrigger"],"trait":["EntityEvent","Event","SetEntityEventTarget","Trigger"]};

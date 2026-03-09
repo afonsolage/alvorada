@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["clear_gizmo_context","collect_requested_gizmos","end_gizmo_context","propagate_gizmos","start_gizmo_context"],"mod":["aabb","arcs","arrows","circles","config","cross","curves","gizmos","grid","light","prelude","primitives","retained","rounded_box"],"struct":["GizmoAsset","GizmoHandles","GizmoMeshSystems","GizmoPlugin"],"trait":["AppGizmoBuilder"]};

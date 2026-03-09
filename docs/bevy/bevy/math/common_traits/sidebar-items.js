@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["MismatchedUnitsError","Sum","WithDerivative","WithTwoDerivatives"],"trait":["HasTangent","NormedVectorSpace","ScalarField","StableInterpolate","TryStableInterpolate","VectorSpace"]};

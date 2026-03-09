@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":["AudioPlayer","AudioSink","AudioSource","GlobalVolume","Pitch","PlaybackSettings","SpatialAudioSink","SpatialListener"],"trait":["AudioSinkPlayback","Decodable"]};
