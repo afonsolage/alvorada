@@ -67,7 +67,7 @@ src/
 
 **Goal:** Spawn coloured triangle monsters at random passable locations on the map.
 
-#### Task M1-1 — Define monster types and biome pools
+- [ ] **Task M1-1** — Define monster types and biome pools
 
 Create `src/monster.rs`. Define the following types:
 
@@ -83,7 +83,7 @@ MonsterType enum {
 
 Each variant must implement a method returning `(name: &str, color: Color)`.
 
-#### Task M1-2 — Define the `Monster` component
+- [ ] **Task M1-2** — Define the `Monster` component
 
 ```rust
 #[derive(Component)]
@@ -93,7 +93,7 @@ pub struct Monster {
 }
 ```
 
-#### Task M1-3 — Define the `Health` component (shared by player and monsters)
+- [ ] **Task M1-3** — Define the `Health` component (shared by player and monsters)
 
 Create a generic `Health` component in `src/combat.rs` (it is used by both M1 and M3):
 
@@ -112,7 +112,7 @@ impl Health {
 
 Each monster spawns with `Health::new(10)`.
 
-#### Task M1-4 — Spawn monsters on startup
+- [ ] **Task M1-4** — Spawn monsters on startup
 
 Add a `spawn_monsters` startup system to `MonsterPlugin`.
 
@@ -125,7 +125,7 @@ Add a `spawn_monsters` startup system to `MonsterPlugin`.
   - Components: `Monster`, `Health::new(10)`.
 - Use a deterministic seed (e.g. the existing seed `12345`) so the layout is reproducible.
 
-#### Task M1-5 — Register `MonsterPlugin`
+- [ ] **Task M1-5** — Register `MonsterPlugin`
 
 In `src/main.rs`, add `monster::MonsterPlugin` to the plugin tuple. Add `mod monster;` declaration.
 
@@ -135,7 +135,7 @@ In `src/main.rs`, add `monster::MonsterPlugin` to the plugin tuple. Add `mod mon
 
 **Goal:** Assign each region of the map a biome label so the monster spawner (M1-4) can populate it correctly.
 
-#### Task M2-1 — Define `Biome` enum
+- [ ] **Task M2-1** — Define `Biome` enum
 
 Add to `src/terrain/map.rs` (or a new `src/terrain/biome.rs`):
 
@@ -149,7 +149,7 @@ Biome enum {
 }
 ```
 
-#### Task M2-2 — Map tile types to biomes
+- [ ] **Task M2-2** — Map tile types to biomes
 
 Add a method `TileType::biome(self) -> Option<Biome>` that maps:
 
@@ -162,11 +162,11 @@ Add a method `TileType::biome(self) -> Option<Biome>` that maps:
 | Mountain | Volcanic |
 | DeepWater / ShallowWater | `None` (impassable — no monsters) |
 
-#### Task M2-3 — Expose biome-to-monster mapping
+- [ ] **Task M2-3** — Expose biome-to-monster mapping
 
 Add a method `Biome::monster_type(self) -> MonsterType` returning the monster type associated with each biome (matching the table in M1-1).
 
-#### Task M2-4 — Wire biome lookup into the spawner (M1-4)
+- [ ] **Task M2-4** — Wire biome lookup into the spawner (M1-4)
 
 In `spawn_monsters`, for each tile, call `map.get(x, y).biome()` to determine which monster pool to draw from, then spawn accordingly.
 
@@ -176,18 +176,18 @@ In `spawn_monsters`, for each tile, call `map.get(x, y).biome()` to determine wh
 
 **Goal:** Give the player a `Health` component and display it in a fixed bottom-left HUD.
 
-#### Task M3-1 — Add `Health` to the player entity
+- [ ] **Task M3-1** — Add `Health` to the player entity
 
 In `src/player.rs`, attach `Health::new(100)` when spawning the player (alongside the existing `Player` marker, mesh, and material).
 
-#### Task M3-2 — Create `HudPlugin` in `src/hud.rs`
+- [ ] **Task M3-2** — Create `HudPlugin` in `src/hud.rs`
 
 The plugin registers two startup systems and one update system:
 
 1. `spawn_player_hud` — builds the UI node tree.
 2. `update_player_health_bar` — syncs the fill bar width to `Health::current / Health::max`.
 
-#### Task M3-3 — Design the health bar node tree
+- [ ] **Task M3-3** — Design the health bar node tree
 
 ```
 Node (position: Absolute, bottom: 16px, left: 16px, flex_direction: Column)
@@ -198,7 +198,7 @@ Node (position: Absolute, bottom: 16px, left: 16px, flex_direction: Column)
             [marker component: PlayerHealthBarFill]
 ```
 
-#### Task M3-4 — Health update system
+- [ ] **Task M3-4** — Health update system
 
 ```rust
 fn update_player_health_bar(
@@ -210,7 +210,7 @@ fn update_player_health_bar(
 }
 ```
 
-#### Task M3-5 — Register `HudPlugin` in `main.rs`
+- [ ] **Task M3-5** — Register `HudPlugin` in `main.rs`
 
 Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 
@@ -222,7 +222,7 @@ Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 
 > **Implementation note:** Use **child mesh entities** in world space rather than Bevy UI nodes, because UI nodes are in screen space and cannot follow world-space entities without custom projection math. Each monster spawns two child entities: a name text billboard and a health-bar quad pair.
 
-#### Task M4-1 — Define marker components
+- [ ] **Task M4-1** — Define marker components
 
 ```rust
 #[derive(Component)] pub struct MonsterNameLabel;
@@ -230,7 +230,7 @@ Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 #[derive(Component)] pub struct MonsterHealthBarFill;
 ```
 
-#### Task M4-2 — Spawn label children during monster spawn (extend M1-4)
+- [ ] **Task M4-2** — Spawn label children during monster spawn (extend M1-4)
 
 When spawning each monster, use `commands.entity(monster_id).with_children(|parent| { … })` to attach:
 
@@ -252,7 +252,7 @@ When spawning each monster, use `commands.entity(monster_id).with_children(|pare
 
 > **Sizing note:** Because the fill bar must shrink from the left edge, it should be anchored at the left: set `Transform::from_xyz(-HEALTH_BAR_WIDTH * 0.5 + (pct * HEALTH_BAR_WIDTH * 0.5), 0.0, 0.01)` and update its `Mesh2d` asset width each frame, or scale via `Transform::scale`. The simpler approach is to **rescale the fill entity on X**: `fill_transform.scale.x = pct;` and shift its X position to keep the left edge fixed.
 
-#### Task M4-3 — Update fill bar each frame
+- [ ] **Task M4-3** — Update fill bar each frame
 
 ```rust
 fn update_monster_health_bars(
@@ -280,7 +280,7 @@ Register this system on `MonsterPlugin` under `Update`.
 
 **Goal:** Pressing `Space` spawns a short-lived square hitbox centred on the player; any monster within half a tile takes 1–5 random damage; monsters that reach 0 HP are despawned.
 
-#### Task M5-1 — Define the `AttackHitbox` component
+- [ ] **Task M5-1** — Define the `AttackHitbox` component
 
 Create `src/combat.rs` (if it does not already exist from M1-3):
 
@@ -292,7 +292,7 @@ pub struct AttackHitbox {
 }
 ```
 
-#### Task M5-2 — Define the attack range constant
+- [ ] **Task M5-2** — Define the attack range constant
 
 ```rust
 /// Half a tile — the radius within which a monster is hit by an attack.
@@ -305,7 +305,7 @@ const ATTACK_VISUAL_SIZE: f32 = TILE_SIZE;
 const ATTACK_LIFETIME: f32 = 0.15;
 ```
 
-#### Task M5-3 — `player_attack` system
+- [ ] **Task M5-3** — `player_attack` system
 
 Triggered when `Space` is **just pressed** (not held):
 
@@ -331,7 +331,7 @@ fn player_attack(
 }
 ```
 
-#### Task M5-4 — `apply_attack_damage` system
+- [ ] **Task M5-4** — `apply_attack_damage` system
 
 Runs immediately after `player_attack` using `chain()` or `after()` ordering:
 
@@ -362,7 +362,7 @@ fn apply_attack_damage(
 
 > **Randomness note:** The MVP may use Bevy's `GlobalEntropy` (from `bevy_prng`) or a simple deterministic formula. To avoid an external dependency, a lightweight inline PRNG seeded by `entity.index() ^ frame_count` is sufficient for a demo.
 
-#### Task M5-5 — `tick_attack_hitbox` system
+- [ ] **Task M5-5** — `tick_attack_hitbox` system
 
 Despawns hitbox entities when their lifetime expires:
 
@@ -381,7 +381,7 @@ fn tick_attack_hitbox(
 }
 ```
 
-#### Task M5-6 — Create `CombatPlugin` and register systems
+- [ ] **Task M5-6** — Create `CombatPlugin` and register systems
 
 ```rust
 pub struct CombatPlugin;
