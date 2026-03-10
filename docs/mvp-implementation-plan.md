@@ -67,7 +67,7 @@ src/
 
 **Goal:** Spawn coloured triangle monsters at random passable locations on the map.
 
-- [ ] **Task M1-1** — Define monster types and biome pools
+- [x] **Task M1-1** — Define monster types and biome pools
 
 Create `src/monster.rs`. Define the following types:
 
@@ -83,7 +83,7 @@ MonsterType enum {
 
 Each variant must implement a method returning `(name: &str, color: Color)`.
 
-- [ ] **Task M1-2** — Define the `Monster` component
+- [x] **Task M1-2** — Define the `Monster` component
 
 ```rust
 #[derive(Component)]
@@ -93,7 +93,7 @@ pub struct Monster {
 }
 ```
 
-- [ ] **Task M1-3** — Define the `Health` component (shared by player and monsters)
+- [x] **Task M1-3** — Define the `Health` component (shared by player and monsters)
 
 Create a generic `Health` component in `src/combat.rs` (it is used by both M1 and M3):
 
@@ -112,7 +112,7 @@ impl Health {
 
 Each monster spawns with `Health::new(10)`.
 
-- [ ] **Task M1-4** — Spawn monsters on startup
+- [x] **Task M1-4** — Spawn monsters on startup
 
 Add a `spawn_monsters` startup system to `MonsterPlugin`.
 
@@ -125,7 +125,7 @@ Add a `spawn_monsters` startup system to `MonsterPlugin`.
   - Components: `Monster`, `Health::new(10)`.
 - Use a deterministic seed (e.g. the existing seed `12345`) so the layout is reproducible.
 
-- [ ] **Task M1-5** — Register `MonsterPlugin`
+- [x] **Task M1-5** — Register `MonsterPlugin`
 
 In `src/main.rs`, add `monster::MonsterPlugin` to the plugin tuple. Add `mod monster;` declaration.
 
@@ -135,7 +135,7 @@ In `src/main.rs`, add `monster::MonsterPlugin` to the plugin tuple. Add `mod mon
 
 **Goal:** Assign each region of the map a biome label so the monster spawner (M1-4) can populate it correctly.
 
-- [ ] **Task M2-1** — Define `Biome` enum
+- [x] **Task M2-1** — Define `Biome` enum
 
 Add to `src/terrain/map.rs` (or a new `src/terrain/biome.rs`):
 
@@ -149,7 +149,7 @@ Biome enum {
 }
 ```
 
-- [ ] **Task M2-2** — Map tile types to biomes
+- [x] **Task M2-2** — Map tile types to biomes
 
 Add a method `TileType::biome(self) -> Option<Biome>` that maps:
 
@@ -162,11 +162,11 @@ Add a method `TileType::biome(self) -> Option<Biome>` that maps:
 | Mountain | Volcanic |
 | DeepWater / ShallowWater | `None` (impassable — no monsters) |
 
-- [ ] **Task M2-3** — Expose biome-to-monster mapping
+- [x] **Task M2-3** — Expose biome-to-monster mapping
 
 Add a method `Biome::monster_type(self) -> MonsterType` returning the monster type associated with each biome (matching the table in M1-1).
 
-- [ ] **Task M2-4** — Wire biome lookup into the spawner (M1-4)
+- [x] **Task M2-4** — Wire biome lookup into the spawner (M1-4)
 
 In `spawn_monsters`, for each tile, call `map.get(x, y).biome()` to determine which monster pool to draw from, then spawn accordingly.
 

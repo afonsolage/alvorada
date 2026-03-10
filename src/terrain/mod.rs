@@ -23,7 +23,7 @@ pub mod map;
 pub mod noise;
 pub mod render;
 
-pub use map::{Map, TILE_SIZE};
+pub use map::{Biome, Map, TILE_SIZE};
 
 use bevy::prelude::*;
 

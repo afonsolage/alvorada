@@ -105,6 +105,21 @@ impl TileType {
         self.movement_cost().is_finite()
     }
 
+    /// Maps this tile type to the [`Biome`] that covers it.
+    ///
+    /// Water tiles return `None` — they are impassable and carry no monster
+    /// pool.
+    pub fn biome(self) -> Option<Biome> {
+        match self {
+            TileType::Grass => Some(Biome::Grasslands),
+            TileType::Forest => Some(Biome::Forest),
+            TileType::Sand => Some(Biome::Desert),
+            TileType::Snow => Some(Biome::Tundra),
+            TileType::Mountain => Some(Biome::Volcanic),
+            TileType::DeepWater | TileType::ShallowWater => None,
+        }
+    }
+
     /// Converts a raw height value (noise output, roughly `[−1, 1]`) to a
     /// tile type using fixed elevation thresholds.
     fn from_height(h: f64) -> Self {
@@ -118,6 +133,28 @@ impl TileType {
             _ => TileType::Snow,
         }
     }
+}
+
+// ---------------------------------------------------------------------------
+// Biome
+// ---------------------------------------------------------------------------
+
+/// Biome regions that determine which monster pool appears on a given tile.
+///
+/// Each [`TileType`] maps to exactly one biome (or `None` for water tiles)
+/// via [`TileType::biome`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Biome {
+    /// Open grassland — home to `Slime` monsters.
+    Grasslands,
+    /// Dense forest — home to `Wolf` monsters.
+    Forest,
+    /// Sandy desert — home to `Scorpion` monsters.
+    Desert,
+    /// Snow-covered tundra — home to `IceGolem` monsters.
+    Tundra,
+    /// Volcanic mountain terrain — home to `LavaSpider` monsters.
+    Volcanic,
 }
 
 // ---------------------------------------------------------------------------

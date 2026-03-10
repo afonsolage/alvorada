@@ -14,8 +14,12 @@
 //! | [`terrain::TerrainPlugin`] | Procedurally generated 256×256 tile map. |
 //! | [`player::PlayerPlugin`]   | Player circle entity and WASD movement. |
 //! | [`camera::CameraPlugin`]   | Camera that follows the player + mouse-wheel zoom. |
+//! | [`monster::MonsterPlugin`] | Monster entities and biome-based spawn system. |
+//! | [`combat::CombatPlugin`]   | Shared `Health` component and combat systems. |
 
 mod camera;
+mod combat;
+mod monster;
 mod player;
 mod terrain;
 
@@ -37,6 +41,8 @@ fn main() {
             terrain::TerrainPlugin,
             player::PlayerPlugin,
             camera::CameraPlugin,
+            monster::MonsterPlugin,
+            combat::CombatPlugin,
         ))
         .run();
 }
