@@ -222,7 +222,7 @@ Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 
 > **Implementation note:** Use **child mesh entities** in world space rather than Bevy UI nodes, because UI nodes are in screen space and cannot follow world-space entities without custom projection math. Each monster spawns two child entities: a name text billboard and a health-bar quad pair.
 
-- [ ] **Task M4-1** — Define marker components
+- [x] **Task M4-1** — Define marker components
 
 ```rust
 #[derive(Component)] pub struct MonsterNameLabel;
@@ -230,7 +230,7 @@ Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 #[derive(Component)] pub struct MonsterHealthBarFill;
 ```
 
-- [ ] **Task M4-2** — Spawn label children during monster spawn (extend M1-4)
+- [x] **Task M4-2** — Spawn label children during monster spawn (extend M1-4)
 
 When spawning each monster, use `commands.entity(monster_id).with_children(|parent| { … })` to attach:
 
@@ -252,7 +252,7 @@ When spawning each monster, use `commands.entity(monster_id).with_children(|pare
 
 > **Sizing note:** Because the fill bar must shrink from the left edge, it should be anchored at the left: set `Transform::from_xyz(-HEALTH_BAR_WIDTH * 0.5 + (pct * HEALTH_BAR_WIDTH * 0.5), 0.0, 0.01)` and update its `Mesh2d` asset width each frame, or scale via `Transform::scale`. The simpler approach is to **rescale the fill entity on X**: `fill_transform.scale.x = pct;` and shift its X position to keep the left edge fixed.
 
-- [ ] **Task M4-3** — Update fill bar each frame
+- [x] **Task M4-3** — Update fill bar each frame
 
 ```rust
 fn update_monster_health_bars(
@@ -280,7 +280,7 @@ Register this system on `MonsterPlugin` under `Update`.
 
 **Goal:** Pressing `Space` spawns a short-lived square hitbox centred on the player; any monster within half a tile takes 1–5 random damage; monsters that reach 0 HP are despawned.
 
-- [ ] **Task M5-1** — Define the `AttackHitbox` component
+- [x] **Task M5-1** — Define the `AttackHitbox` component
 
 Create `src/combat.rs` (if it does not already exist from M1-3):
 
@@ -292,7 +292,7 @@ pub struct AttackHitbox {
 }
 ```
 
-- [ ] **Task M5-2** — Define the attack range constant
+- [x] **Task M5-2** — Define the attack range constant
 
 ```rust
 /// Half a tile — the radius within which a monster is hit by an attack.
@@ -305,7 +305,7 @@ const ATTACK_VISUAL_SIZE: f32 = TILE_SIZE;
 const ATTACK_LIFETIME: f32 = 0.15;
 ```
 
-- [ ] **Task M5-3** — `player_attack` system
+- [x] **Task M5-3** — `player_attack` system
 
 Triggered when `Space` is **just pressed** (not held):
 
@@ -331,7 +331,7 @@ fn player_attack(
 }
 ```
 
-- [ ] **Task M5-4** — `apply_attack_damage` system
+- [x] **Task M5-4** — `apply_attack_damage` system
 
 Runs immediately after `player_attack` using `chain()` or `after()` ordering:
 
@@ -362,7 +362,7 @@ fn apply_attack_damage(
 
 > **Randomness note:** The MVP may use Bevy's `GlobalEntropy` (from `bevy_prng`) or a simple deterministic formula. To avoid an external dependency, a lightweight inline PRNG seeded by `entity.index() ^ frame_count` is sufficient for a demo.
 
-- [ ] **Task M5-5** — `tick_attack_hitbox` system
+- [x] **Task M5-5** — `tick_attack_hitbox` system
 
 Despawns hitbox entities when their lifetime expires:
 
@@ -381,7 +381,7 @@ fn tick_attack_hitbox(
 }
 ```
 
-- [ ] **Task M5-6** — Create `CombatPlugin` and register systems
+- [x] **Task M5-6** — Create `CombatPlugin` and register systems
 
 ```rust
 pub struct CombatPlugin;

@@ -40,6 +40,12 @@ const MONSTER_HP: i32 = 10;
 /// Number of monsters spawned per biome type on startup.
 const MONSTERS_PER_BIOME: usize = 10;
 
+/// Width of the floating health bar rendered above each monster (world units).
+const HEALTH_BAR_WIDTH: f32 = 28.0;
+
+/// Height of the floating health bar rendered above each monster (world units).
+const HEALTH_BAR_HEIGHT: f32 = 4.0;
+
 // ---------------------------------------------------------------------------
 // Monster type
 // ---------------------------------------------------------------------------
@@ -78,13 +84,27 @@ impl MonsterType {
 
 /// Marks a monster entity and records its species and display name.
 #[derive(Component)]
-#[allow(dead_code)] // fields used by future label/combat systems (M4, M5)
+#[allow(dead_code)] // fields read by label/combat systems (M4, M5)
 pub struct Monster {
     /// The species driving this monster's colour and biome association.
     pub monster_type: MonsterType,
     /// Display name shown in floating labels (populated from [`MonsterType::info`]).
     pub name: &'static str,
 }
+
+/// Marker component for the floating name text child of a monster entity.
+#[derive(Component)]
+pub struct MonsterNameLabel;
+
+/// Marker component for the health bar background quad child of a monster entity.
+#[derive(Component)]
+pub struct MonsterHealthBarBg;
+
+/// Marker component for the health bar fill quad child of a monster entity.
+///
+/// Queried by [`update_monster_health_bars`] to rescale the fill width each frame.
+#[derive(Component)]
+pub struct MonsterHealthBarFill;
 
 // ---------------------------------------------------------------------------
 // Biome → monster mapping
@@ -112,7 +132,8 @@ pub struct MonsterPlugin;
 
 impl Plugin for MonsterPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_monsters);
+        app.add_systems(Startup, spawn_monsters)
+            .add_systems(Update, update_monster_health_bars);
     }
 }
 
@@ -125,6 +146,11 @@ impl Plugin for MonsterPlugin {
 /// Tile positions are sampled deterministically using a simple LCG seeded by
 /// the map seed (`12345`) XOR-ed with a per-biome offset, so the layout is
 /// always the same for a given map.
+///
+/// Each monster entity has three child entities attached:
+/// - A [`MonsterNameLabel`] `Text2d` floating above the triangle.
+/// - A [`MonsterHealthBarBg`] dark-grey rectangle behind the fill.
+/// - A [`MonsterHealthBarFill`] red rectangle scaled each frame to current HP.
 fn spawn_monsters(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -138,6 +164,12 @@ fn spawn_monsters(
         Biome::Tundra,
         Biome::Volcanic,
     ];
+
+    // Shared meshes for the health bar quads (reused across all monsters).
+    let bar_bg_mesh = meshes.add(Rectangle::new(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT));
+    let bar_fill_mesh = meshes.add(Rectangle::new(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT));
+    let bar_bg_material = materials.add(ColorMaterial::from_color(Color::srgb(0.2, 0.2, 0.2)));
+    let bar_fill_material = materials.add(ColorMaterial::from_color(Color::srgb(0.85, 0.15, 0.15)));
 
     for (biome_idx, biome) in biomes.iter().enumerate() {
         let monster_type = biome.monster_type();
@@ -170,13 +202,65 @@ fn spawn_monsters(
             let (tx, ty) = biome_tiles[idx];
             let pos = Map::tile_to_world(tx, ty);
 
-            commands.spawn((
-                Monster { monster_type, name },
-                Health::new(MONSTER_HP),
-                Mesh2d(mesh.clone()),
-                MeshMaterial2d(material.clone()),
-                Transform::from_xyz(pos.x, pos.y, 1.0),
-            ));
+            commands
+                .spawn((
+                    Monster { monster_type, name },
+                    Health::new(MONSTER_HP),
+                    Mesh2d(mesh.clone()),
+                    MeshMaterial2d(material.clone()),
+                    Transform::from_xyz(pos.x, pos.y, 1.0),
+                ))
+                .with_children(|parent| {
+                    // Floating name label above the triangle.
+                    parent.spawn((
+                        MonsterNameLabel,
+                        Text2d::new(name),
+                        TextFont {
+                            font_size: 10.0,
+                            ..default()
+                        },
+                        TextColor(Color::WHITE),
+                        Transform::from_xyz(0.0, MONSTER_RADIUS + 14.0, 0.1),
+                    ));
+
+                    // Health bar background (dark grey).
+                    parent.spawn((
+                        MonsterHealthBarBg,
+                        Mesh2d(bar_bg_mesh.clone()),
+                        MeshMaterial2d(bar_bg_material.clone()),
+                        Transform::from_xyz(0.0, MONSTER_RADIUS + 6.0, 0.1),
+                    ));
+
+                    // Health bar fill (red, starts at full width).
+                    // Positioned at the same Y as the background but slightly in front.
+                    // Scaled on X each frame by `update_monster_health_bars`.
+                    parent.spawn((
+                        MonsterHealthBarFill,
+                        Mesh2d(bar_fill_mesh.clone()),
+                        MeshMaterial2d(bar_fill_material.clone()),
+                        Transform::from_xyz(0.0, MONSTER_RADIUS + 6.0, 0.11),
+                    ));
+                });
+        }
+    }
+}
+
+/// Rescales each monster's health bar fill to reflect current HP.
+///
+/// The fill quad is anchored at its left edge by combining X-axis scaling with
+/// a compensating translation, so the bar empties from right to left.
+fn update_monster_health_bars(
+    monsters: Query<(&Health, &Children), With<Monster>>,
+    mut fills: Query<&mut Transform, With<MonsterHealthBarFill>>,
+) {
+    for (health, children) in &monsters {
+        let pct = (health.current as f32 / health.max as f32).clamp(0.0, 1.0);
+        for &child in children {
+            if let Ok(mut t) = fills.get_mut(child) {
+                t.scale.x = pct;
+                // Shift left so the left edge stays fixed as the bar shrinks.
+                t.translation.x = HEALTH_BAR_WIDTH * 0.5 * (pct - 1.0);
+            }
         }
     }
 }
