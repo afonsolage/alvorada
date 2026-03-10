@@ -2,7 +2,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/afonsolage/alvorada/actions/workflows/deploy.yml/badge.svg)](https://github.com/afonsolage/alvorada/actions/workflows/deploy.yml)
 
-A 2D game built with [Bevy](https://bevyengine.org/) and Rust.
+A 2D game built with [Bevy](https://bevyengine.org/) and Rust, build entirely with Github Coding Agent, for learning purposes.
 
 > **Play online:** https://afonsolage.github.io/alvorada/
 
