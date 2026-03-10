@@ -256,7 +256,25 @@ Portal modifiers allow tuning the map's contents. Examples (not final):
 | Mini-map      | Top-right          | Explored tiles of current map |
 | Travel charges| Top-left           | Remaining charges on active portal |
 
-### 8.3 Windowed Panels
+### 8.3 Camera Controls
+
+| Control            | Action       |
+|--------------------|--------------|
+| Mouse scroll up    | Zoom in      |
+| Mouse scroll down  | Zoom out     |
+
+Zoom is implemented via an orthographic projection scale clamped to `[0.2, 10.0]`.
+
+| Setting | Value | Notes |
+|---------|-------|-------|
+| Default sensitivity | `0.01` | Scale units per scroll unit |
+| Min sensitivity | `0.01` | Lower bound on the in-game slider |
+| Max sensitivity | `0.30` | Upper bound on the in-game slider |
+| Initial zoom scale | `3.0` | Wide view on first load |
+
+A zoom-sensitivity slider is displayed in the bottom-right corner of the screen so players can tune the speed without restarting.
+
+### 8.4 Windowed Panels
 
 The following panels open on demand and can be repositioned:
 
