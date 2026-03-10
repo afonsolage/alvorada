@@ -42,8 +42,13 @@ pub const PLAYER_MAX_HP: i32 = 100;
 /// Marks the single player entity.
 ///
 /// The actual world position is stored in the entity's [`Transform`] component.
+/// The [`facing`](Player::facing) field tracks the last movement direction so
+/// that the attack hitbox can be spawned in front of the player.
 #[derive(Component)]
-pub struct Player;
+pub struct Player {
+    /// Normalised direction the player last moved.  Defaults to up (`Vec2::Y`).
+    pub facing: Vec2,
+}
 
 // ---------------------------------------------------------------------------
 // Plugin
@@ -76,7 +81,7 @@ fn spawn_player(
     let spawn_pos = map.find_spawn_position();
 
     commands.spawn((
-        Player,
+        Player { facing: Vec2::Y },
         Health::new(PLAYER_MAX_HP),
         Mesh2d(meshes.add(Circle::new(PLAYER_RADIUS))),
         MeshMaterial2d(materials.add(ColorMaterial::from_color(Color::srgb(0.9, 0.2, 0.2)))),
@@ -97,9 +102,9 @@ pub fn player_movement(
     time: Res<Time>,
     keys: Res<ButtonInput<KeyCode>>,
     map: Res<Map>,
-    mut player: Single<(&Player, &mut Transform)>,
+    mut player: Single<(&mut Player, &mut Transform)>,
 ) {
-    let (_, ref mut transform) = *player;
+    let (ref mut player_data, ref mut transform) = *player;
 
     // --- Gather directional input -------------------------------------------
     let mut direction = Vec2::ZERO;
@@ -120,6 +125,9 @@ pub fn player_movement(
     if direction == Vec2::ZERO {
         return;
     }
+
+    // Remember the last movement direction for directional attacks.
+    player_data.facing = direction;
 
     // --- Apply movement-cost modifier based on current tile ------------------
     let current_pos = transform.translation.truncate();
