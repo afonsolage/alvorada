@@ -16,6 +16,7 @@
 
 use bevy::prelude::*;
 
+use crate::combat::Health;
 use crate::terrain::{Map, TILE_SIZE};
 
 // ---------------------------------------------------------------------------
@@ -30,6 +31,9 @@ const PLAYER_RADIUS: f32 = TILE_SIZE * 0.6;
 
 /// Base movement speed in world units per second (on [`TileType::Grass`]).
 const PLAYER_BASE_SPEED: f32 = 150.0;
+
+/// Starting hit-points for the player.
+pub const PLAYER_MAX_HP: i32 = 100;
 
 // ---------------------------------------------------------------------------
 // Components
@@ -73,6 +77,7 @@ fn spawn_player(
 
     commands.spawn((
         Player,
+        Health::new(PLAYER_MAX_HP),
         Mesh2d(meshes.add(Circle::new(PLAYER_RADIUS))),
         MeshMaterial2d(materials.add(ColorMaterial::from_color(Color::srgb(0.9, 0.2, 0.2)))),
         // z = 1.0 renders the player on top of the tile layer (z = 0.0).

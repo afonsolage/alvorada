@@ -16,9 +16,11 @@
 //! | [`camera::CameraPlugin`]   | Camera that follows the player + mouse-wheel zoom. |
 //! | [`monster::MonsterPlugin`] | Monster entities and biome-based spawn system. |
 //! | [`combat::CombatPlugin`]   | Shared `Health` component and combat systems. |
+//! | [`hud::HudPlugin`]         | Player health bar displayed in the bottom-left HUD. |
 
 mod camera;
 mod combat;
+mod hud;
 mod monster;
 mod player;
 mod terrain;
@@ -43,6 +45,7 @@ fn main() {
             camera::CameraPlugin,
             monster::MonsterPlugin,
             combat::CombatPlugin,
+            hud::HudPlugin,
         ))
         .run();
 }

@@ -176,18 +176,18 @@ In `spawn_monsters`, for each tile, call `map.get(x, y).biome()` to determine wh
 
 **Goal:** Give the player a `Health` component and display it in a fixed bottom-left HUD.
 
-- [ ] **Task M3-1** — Add `Health` to the player entity
+- [x] **Task M3-1** — Add `Health` to the player entity
 
 In `src/player.rs`, attach `Health::new(100)` when spawning the player (alongside the existing `Player` marker, mesh, and material).
 
-- [ ] **Task M3-2** — Create `HudPlugin` in `src/hud.rs`
+- [x] **Task M3-2** — Create `HudPlugin` in `src/hud.rs`
 
 The plugin registers two startup systems and one update system:
 
 1. `spawn_player_hud` — builds the UI node tree.
 2. `update_player_health_bar` — syncs the fill bar width to `Health::current / Health::max`.
 
-- [ ] **Task M3-3** — Design the health bar node tree
+- [x] **Task M3-3** — Design the health bar node tree
 
 ```
 Node (position: Absolute, bottom: 16px, left: 16px, flex_direction: Column)
@@ -198,7 +198,7 @@ Node (position: Absolute, bottom: 16px, left: 16px, flex_direction: Column)
             [marker component: PlayerHealthBarFill]
 ```
 
-- [ ] **Task M3-4** — Health update system
+- [x] **Task M3-4** — Health update system
 
 ```rust
 fn update_player_health_bar(
@@ -210,7 +210,7 @@ fn update_player_health_bar(
 }
 ```
 
-- [ ] **Task M3-5** — Register `HudPlugin` in `main.rs`
+- [x] **Task M3-5** — Register `HudPlugin` in `main.rs`
 
 Add `hud::HudPlugin` to the plugin tuple and `mod hud;` declaration.
 
