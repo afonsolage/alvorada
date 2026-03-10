@@ -278,7 +278,7 @@ Register this system on `MonsterPlugin` under `Update`.
 
 ### M5 – Attack System
 
-**Goal:** Pressing `Space` spawns a short-lived square hitbox centred on the player; any monster within half a tile takes 1–5 random damage; monsters that reach 0 HP are despawned.
+**Goal:** Pressing `Space` spawns a short-lived square hitbox in front of the player (in the direction they last moved); any monster within half a tile takes 1–5 random damage; monsters that reach 0 HP are despawned.
 
 - [x] **Task M5-1** — Define the `AttackHitbox` component
 
@@ -398,6 +398,29 @@ impl Plugin for CombatPlugin {
 ```
 
 Register `combat::CombatPlugin` in `main.rs`.
+
+- [x] **Task M5-7** — Make the attack directional
+
+Track the last movement direction in the `Player` component and offset the hitbox spawn by `ATTACK_OFFSET` in that direction so the hitbox appears in front of the player rather than on top of them.
+
+Add a `facing: Vec2` field to `Player` (default: `Vec2::Y`) in `src/player.rs`:
+
+```rust
+#[derive(Component)]
+pub struct Player {
+    /// Normalised direction the player last moved.  Defaults to up (`Vec2::Y`).
+    pub facing: Vec2,
+}
+```
+
+Update `player_movement` to store the normalised direction each frame the player moves.
+
+Add `ATTACK_OFFSET = TILE_SIZE` to `src/combat.rs` and offset the hitbox spawn:
+
+```rust
+let offset = player_data.facing * ATTACK_OFFSET;
+Transform::from_xyz(pos.x + offset.x, pos.y + offset.y, 2.0)
+```
 
 ---
 

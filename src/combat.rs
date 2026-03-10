@@ -5,7 +5,8 @@
 //! as the [`CombatPlugin`] which drives the attack system.
 //!
 //! # Attack system
-//! Pressing **Space** spawns a short-lived square hitbox centred on the player.
+//! Pressing **Space** spawns a short-lived square hitbox in front of the player,
+//! offset one tile in the direction the player last moved ([`Player::facing`]).
 //! Any monster within [`ATTACK_RANGE`] takes 1–5 random damage.  Monsters that
 //! reach 0 HP are immediately despawned (along with all their child entities).
 //!
@@ -31,6 +32,12 @@ const ATTACK_VISUAL_SIZE: f32 = TILE_SIZE;
 
 /// How long (in seconds) the attack square remains visible before despawning.
 const ATTACK_LIFETIME: f32 = 0.15;
+
+/// How far in front of the player (in world units) the attack hitbox is centred.
+///
+/// Set to one full tile so the hitbox spawns just ahead of the player circle
+/// without overlapping it.
+const ATTACK_OFFSET: f32 = TILE_SIZE;
 
 // ---------------------------------------------------------------------------
 // Components
@@ -94,19 +101,24 @@ impl Plugin for CombatPlugin {
 // Systems
 // ---------------------------------------------------------------------------
 
-/// Spawns an [`AttackHitbox`] centred on the player when **Space** is pressed.
+/// Spawns an [`AttackHitbox`] in front of the player when **Space** is pressed.
+///
+/// The hitbox is offset from the player's position by [`ATTACK_OFFSET`] in the
+/// direction the player last moved ([`Player::facing`]).
 fn player_attack(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
     keys: Res<ButtonInput<KeyCode>>,
-    player: Single<&Transform, With<Player>>,
+    player: Single<(&Transform, &Player), With<Player>>,
 ) {
     if !keys.just_pressed(KeyCode::Space) {
         return;
     }
 
-    let pos = player.translation;
+    let (transform, player_data) = *player;
+    let pos = transform.translation;
+    let offset = player_data.facing * ATTACK_OFFSET;
     commands.spawn((
         AttackHitbox {
             lifetime: ATTACK_LIFETIME,
@@ -115,7 +127,7 @@ fn player_attack(
         MeshMaterial2d(materials.add(ColorMaterial::from_color(Color::srgba(
             1.0, 1.0, 0.2, 0.5,
         )))),
-        Transform::from_xyz(pos.x, pos.y, 2.0),
+        Transform::from_xyz(pos.x + offset.x, pos.y + offset.y, 2.0),
     ));
 }
 
