@@ -253,6 +253,58 @@ impl Map {
         }
     }
 
+    /// Returns `true` if a circle of the given `radius` centred at `world_pos`
+    /// does not overlap any impassable tile and lies fully within the map boundary.
+    ///
+    /// Uses exact circle-vs-AABB distance testing, so the player's circular
+    /// sprite never visually penetrates an impassable tile boundary.  Pass the
+    /// player's world-space [`Transform`] translation and the player's radius
+    /// constant to get a physically correct collision answer.
+    ///
+    /// [`Transform`]: bevy::transform::components::Transform
+    pub fn circle_passable(&self, world_pos: Vec2, radius: f32) -> bool {
+        let half = MAP_SIZE as f32 * TILE_SIZE * 0.5;
+
+        // Reject any position where the circle extends outside the map boundary.
+        if world_pos.x - radius < -half
+            || world_pos.x + radius > half
+            || world_pos.y - radius < -half
+            || world_pos.y + radius > half
+        {
+            return false;
+        }
+
+        // Tile-index range covered by the circle's axis-aligned bounding box.
+        let tx_min = ((world_pos.x - radius + half) / TILE_SIZE).floor() as u32;
+        let tx_max = ((world_pos.x + radius + half) / TILE_SIZE)
+            .floor()
+            .min(MAP_SIZE as f32 - 1.0) as u32;
+        let ty_min = ((world_pos.y - radius + half) / TILE_SIZE).floor() as u32;
+        let ty_max = ((world_pos.y + radius + half) / TILE_SIZE)
+            .floor()
+            .min(MAP_SIZE as f32 - 1.0) as u32;
+
+        for ty in ty_min..=ty_max {
+            for tx in tx_min..=tx_max {
+                if !self.get(tx, ty).is_passable() {
+                    // World-space AABB of this impassable tile.
+                    let tile_min = Vec2::new(
+                        tx as f32 * TILE_SIZE - half,
+                        ty as f32 * TILE_SIZE - half,
+                    );
+                    let tile_max = tile_min + Vec2::splat(TILE_SIZE);
+
+                    // Closest point on the AABB to the circle centre.
+                    let closest = world_pos.clamp(tile_min, tile_max);
+                    if closest.distance_squared(world_pos) < radius * radius {
+                        return false;
+                    }
+                }
+            }
+        }
+        true
+    }
+
     /// Finds the nearest passable tile to the centre of the map.
     ///
     /// Performs an expanding-box scan so that inland tiles are preferred.
@@ -366,5 +418,57 @@ mod tests {
         assert!(TileType::Forest.is_passable());
         assert!(TileType::Mountain.is_passable());
         assert!(TileType::Snow.is_passable());
+    }
+
+    #[test]
+    fn circle_passable_at_spawn_with_small_radius() {
+        let map = Map::generate(12345);
+        let spawn = map.find_spawn_position();
+        // At the spawn position (centre of a passable tile) with a very small
+        // radius the result must be true — the circle is entirely within a
+        // passable tile.
+        assert!(
+            map.circle_passable(spawn, 0.1),
+            "spawn position should be passable with a tiny radius"
+        );
+    }
+
+    #[test]
+    fn circle_passable_all_water_map_fails() {
+        // Map::new() fills every tile with DeepWater (impassable).
+        let map = Map::new();
+        // Any position whose circle overlaps the map should fail.
+        assert!(
+            !map.circle_passable(Vec2::ZERO, 1.0),
+            "all-water map: position at origin should not be passable"
+        );
+    }
+
+    #[test]
+    fn circle_passable_outside_map_boundary_fails() {
+        let map = Map::generate(12345);
+        let half = MAP_SIZE as f32 * TILE_SIZE * 0.5;
+        // A circle whose edge extends beyond the map boundary must be rejected.
+        assert!(
+            !map.circle_passable(Vec2::new(half + 1.0, 0.0), 1.0),
+            "position outside map (x > half) should not be passable"
+        );
+        assert!(
+            !map.circle_passable(Vec2::new(0.0, half + 1.0), 1.0),
+            "position outside map (y > half) should not be passable"
+        );
+    }
+
+    #[test]
+    fn circle_passable_radius_matters() {
+        // Use a generated map and find a passable spawn location.
+        let map = Map::generate(12345);
+        let spawn = map.find_spawn_position();
+        // With a tiny radius the position is passable.
+        assert!(map.circle_passable(spawn, 0.1));
+        // With a radius equal to the full map size the circle definitely extends
+        // into impassable (water) tiles — should fail.
+        let huge_radius = MAP_SIZE as f32 * TILE_SIZE;
+        assert!(!map.circle_passable(spawn, huge_radius));
     }
 }

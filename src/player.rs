@@ -92,12 +92,15 @@ fn spawn_player(
 
 /// Moves the player with **WASD** (or arrow keys), respecting tile properties.
 ///
-/// Movement is blocked when the destination tile is impassable (water).
-/// On passable tiles the effective speed is `PLAYER_BASE_SPEED / movement_cost`,
-/// so sand and forest tiles feel slower than open grassland.
+/// Movement is blocked when the player's circle would overlap an impassable
+/// (water) tile.  On passable tiles the effective speed is
+/// `PLAYER_BASE_SPEED / movement_cost`, so sand and forest tiles feel slower
+/// than open grassland.
 ///
 /// Collision is resolved per-axis so the player can slide smoothly along
-/// impassable boundaries instead of stopping dead on contact.
+/// impassable boundaries instead of stopping dead on contact.  The full
+/// circular radius is used for the passability test, so the player's sprite
+/// never visually penetrates a wall.
 pub fn player_movement(
     time: Res<Time>,
     keys: Res<ButtonInput<KeyCode>>,
@@ -146,20 +149,15 @@ pub fn player_movement(
     let delta = direction * PLAYER_BASE_SPEED * speed_factor * time.delta_secs();
     let new_pos = current_pos + delta;
 
-    // --- Axis-separated collision against impassable tiles -------------------
-    // Try the full move first; if blocked, fall back to each axis independently
-    // so the player slides smoothly along coastlines and walls.
-    let is_passable = |pos: Vec2| {
-        Map::world_to_tile(pos)
-            .map(|(tx, ty)| map.get(tx, ty).is_passable())
-            .unwrap_or(false) // Outside map boundary is also impassable.
-    };
-
-    let final_pos = if is_passable(new_pos) {
+    // --- Circle-based collision against impassable tiles --------------------
+    // Use the player's full circular radius for the passability test so the
+    // visible sprite never overlaps an impassable tile.  Axis-separated
+    // fallbacks still allow the player to slide smoothly along walls.
+    let final_pos = if map.circle_passable(new_pos, PLAYER_RADIUS) {
         new_pos
-    } else if is_passable(Vec2::new(new_pos.x, current_pos.y)) {
+    } else if map.circle_passable(Vec2::new(new_pos.x, current_pos.y), PLAYER_RADIUS) {
         Vec2::new(new_pos.x, current_pos.y)
-    } else if is_passable(Vec2::new(current_pos.x, new_pos.y)) {
+    } else if map.circle_passable(Vec2::new(current_pos.x, new_pos.y), PLAYER_RADIUS) {
         Vec2::new(current_pos.x, new_pos.y)
     } else {
         current_pos
