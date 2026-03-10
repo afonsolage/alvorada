@@ -24,7 +24,7 @@ use crate::player::Player;
 // ---------------------------------------------------------------------------
 
 /// Default scroll-wheel zoom sensitivity (orthographic scale change per scroll unit).
-const DEFAULT_ZOOM_SENSITIVITY: f32 = 0.05;
+const DEFAULT_ZOOM_SENSITIVITY: f32 = 0.01;
 
 /// Minimum sensitivity exposed on the slider.
 const MIN_SENSITIVITY: f32 = 0.01;
